@@ -6,7 +6,7 @@ export type videoListResponse = {
   nextPageToken: string;
   prevPageToken: string;
   pageInfo: pageInfo;
-  items: [video];
+  items: video[];
 };
 
 export type video = {
@@ -34,7 +34,7 @@ export type searchListResponse = {
   prevPageToken: string;
   regionCode: string;
   pageInfo: pageInfo;
-  items: [searchResult];
+  items: searchResult[];
 };
 
 export type searchResult = {
@@ -63,7 +63,7 @@ type snippet = {
   description: string;
   thumbnails: Dictionary<thumbnail>;
   channelTitle: string;
-  tags: [string];
+  tags: string[];
   categoryId: string;
   liveBroadcastContent: string;
   defaultLanguage: string;
@@ -108,8 +108,8 @@ type contentDetails = {
 };
 
 type regionRestriction = {
-  allowed: [string];
-  blocked: [string];
+  allowed: string[];
+  blocked: string[];
 };
 
 type statistics = {
@@ -127,9 +127,9 @@ type player = {
 };
 
 type topicDetails = {
-  topicIds: [string];
-  relevantTopicIds: [string];
-  topicCategories: [string];
+  topicIds: string[];
+  relevantTopicIds: string[];
+  topicCategories: string[];
 };
 
 type recordingDetails = {
@@ -150,8 +150,8 @@ type fileDetails = {
   fileSize: number;
   fileType: string;
   container: string;
-  videoStreams: [videoStream];
-  audioStreams: [audioStream];
+  videoStreams: videoStream[];
+  audioStreams: audioStream[];
   durationMs: number;
   bitrateBps: number;
   creationTime: string;
@@ -193,16 +193,16 @@ type processingProgress = {
 };
 
 type suggestions = {
-  processingErrors: [string];
-  processingWarnings: [string];
-  processingHints: [string];
-  tagSuggestions: [tagSuggestion];
-  editorSuggestions: [string];
+  processingErrors: string[];
+  processingWarnings: string[];
+  processingHints: string[];
+  tagSuggestions: tagSuggestion[];
+  editorSuggestions: string[];
 };
 
 type tagSuggestion = {
   tag: string;
-  categoryRestricts: [string];
+  categoryRestricts: string[];
 };
 
 type contentRating = {
@@ -226,7 +226,7 @@ type contentRating = {
   cscfRating: string;
   czfilmRating: string;
   djctqRating: string;
-  djctqRatingReasons: [string];
+  djctqRatingReasons: string[];
   ecbmctRating: string;
   eefilmRating: string;
   egfilmRating: string;
@@ -235,7 +235,7 @@ type contentRating = {
   fcoRating: string;
   fmocRating: string;
   fpbRating: string;
-  fpbRatingReasons: [string];
+  fpbRatingReasons: string[];
   fskRating: string;
   grfilmRating: string;
   icaaRating: string;

@@ -8,7 +8,7 @@ export const apiSlice = createApi({
   endpoints: (builder) => ({
     getListVideosResult: builder.query<videoListResponse, string>({
       query: (queryParams) =>
-        `videos?key=${process.env.REACT_APP_API_KEY}&${queryParams}`,
+        `videos?key=${process.env.REACT_APP_API_KEY}${queryParams}`,
     }),
   }),
 });

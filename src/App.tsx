@@ -1,16 +1,22 @@
 import React from "react";
 import "./App.css";
+import { useAppSelector } from "./app/hooks";
+import { selectVideoQuery } from "./services/queryParamsBuilders/videoQuerySlice";
 import { useGetListVideosResultQuery } from "./services/youtube";
+import videoQueryBuilder from "./services/queryParamsBuilders/videoQueryBuilder";
 
 const App = () => {
-  const { data, error, isLoading } = useGetListVideosResultQuery(
-    "part=contentDetails%2Csnippet%2Cstatus%2Cstatistics%2Cplayer%2CtopicDetails%2CrecordingDetails%2Clocalizations%2CliveStreamingDetails&id=Ks-_Mh1QhMc"
-  );
+  const videoQuery = useAppSelector(selectVideoQuery);
+  const query = videoQueryBuilder(videoQuery);
+  console.log(query);
+
+  const { data, error, isLoading } = useGetListVideosResultQuery(query);
+  console.log(isLoading, data);
 
   return (
     <div className="App">
-      <img src={data?.items[0].snippet.thumbnails["high"]?.url} alt="" />
-      {data?.items[0].snippet.title}
+      {/* <img src={data?.items[0].snippet.thumbnails["high"]?.url} alt="" />
+      {data?.items[0].snippet.title} */}
     </div>
   );
 };

@@ -1,6 +1,5 @@
-import { useAppSelector } from "../../app/hooks";
 import createQueryParams from "./createQueryParams";
-import { selectVideoQuery, videoQueryState } from "./videoQuerySlice";
+import { videoQueryState } from "./videoQuerySlice";
 
 const videoQueryBuilder = (videoQueryParams: videoQueryState): string => {
   let resultQuery: string = "";

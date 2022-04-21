@@ -10,7 +10,7 @@ const App = () => {
   const query = videoQueryBuilder(videoQuery);
   console.log(query);
 
-  const { data, error, isLoading } = useGetListVideosResultQuery(query);
+  const { data, isLoading } = useGetListVideosResultQuery(query);
   console.log(isLoading, data);
 
   return (

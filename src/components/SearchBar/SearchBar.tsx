@@ -6,13 +6,15 @@ import {
 } from "../../services/queryParamsBuilders/searchQuerySlice";
 
 export const SearchBar = () => {
-  const query = useAppSelector(selectSearchQuery);
+  const searchQuery = useAppSelector(selectSearchQuery);
   const dispatch = useAppDispatch();
   const [queryTerm, setQueryTerm] = useState<string>("");
 
+  console.log("query outside searchBar", searchQuery);
+
   useEffect(() => {
-    console.log("query useEffect searchBar", query);
-  }, [query]);
+    console.log("query useEffect searchBar", searchQuery);
+  }, [searchQuery]);
 
   return (
     <div>
@@ -29,10 +31,10 @@ export const SearchBar = () => {
         onClick={(e) => {
           console.log("queryTerm", queryTerm);
           dispatch(newQueryTerm(queryTerm));
-          console.log("query searchBar", query);
+          console.log("query searchBar", searchQuery);
         }}
       >
-        {query.q}
+        {searchQuery.q}
       </button>
     </div>
   );

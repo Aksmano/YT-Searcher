@@ -1,0 +1,4 @@
+.thumbnail {
+  border: 3px solid var(--tile-background);
+  border-radius: 1rem;
+}

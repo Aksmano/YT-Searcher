@@ -1,6 +1,9 @@
-const createQueryParams = (name: string, params: string[] | string): string => {
+const createQueryParams = (
+  name: string,
+  params: string[] | string | undefined
+): string => {
   let resultParams: string = "";
-  if (params.length === 0) return resultParams;
+  if (params === undefined || params.length === 0) return resultParams;
 
   resultParams += "&" + name + "=";
   if (typeof params == "string") resultParams += params;

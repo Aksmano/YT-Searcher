@@ -8,12 +8,17 @@ export interface videoQueryState {
   // filters (must be at least one active)
   chart: string; // acceptable states: mostPopular
   id: string[];
+  myRating?: string; // OAuth only
 
   // optional
-  maxResults: string; // 0-50 range
-  pageToken: string;
-  regionCode: string;
-  videoCategoryId: string;
+  h1?: string;
+  maxHeight?: string;
+  maxWidth?: string;
+  onBehalfOfContentOwner?: string; // OAuth
+  maxResults?: string; // 0-50 range
+  pageToken?: string;
+  regionCode?: string;
+  videoCategoryId?: string;
 }
 
 const initialState: videoQueryState = {
@@ -21,16 +26,13 @@ const initialState: videoQueryState = {
   chart: "mostPopular",
   id: [],
   maxResults: "50",
-  pageToken: "",
-  regionCode: "",
-  videoCategoryId: "",
 };
 
 let isAlreadyIn: boolean;
 // let isAlreadyOut: boolean;
 
 export const videoQuerySlice = createSlice({
-  name: "videoSlice",
+  name: "videoQuery",
   initialState,
   reducers: {
     addPart: (state, action: PayloadAction<string>) => {

@@ -1,20 +1,17 @@
 import React from "react";
+import { useSelector } from "react-redux";
 import "./App.css";
-import { useAppSelector } from "./app/hooks";
-import { selectVideoQuery } from "./services/queryParamsBuilders/videoQuerySlice";
-import { useGetListVideosResultQuery } from "./services/youtube";
-import videoQueryBuilder from "./services/queryParamsBuilders/videoQueryBuilder";
+import { SearchBar } from "./components/SearchBar/SearchBar";
+import { selectSearchQuery } from "./services/queryParamsBuilders/searchQuerySlice";
 
 const App = () => {
-  const videoQuery = useAppSelector(selectVideoQuery);
-  const query = videoQueryBuilder(videoQuery);
-  console.log(query);
+  const querySearch = useSelector(selectSearchQuery);
 
-  const { data, isLoading } = useGetListVideosResultQuery(query);
-  console.log(isLoading, data);
+  console.log("query app", querySearch);
 
   return (
     <div className="App">
+      <SearchBar />
       {/* <img src={data?.items[0].snippet.thumbnails["high"]?.url} alt="" />
       {data?.items[0].snippet.title} */}
     </div>

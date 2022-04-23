@@ -33,7 +33,7 @@ const App = () => {
   return (
     <div className="App" data-theme={theme}>
       <button onClick={switchTheme}>Switch theme</button>
-      {/* <SearchBar /> */}
+      <SearchBar />
       {<ListVideoItem />}
       {/* {isLoading ? "" : <VideoItem snippet={data!.items[0].snippet} />} */}
       {/* <img src={data?.items[0].snippet.thumbnails["high"]?.url} alt="" />

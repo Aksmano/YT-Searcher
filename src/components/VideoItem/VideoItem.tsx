@@ -22,6 +22,12 @@ export const VideoItem = ({ snippet }: VideoItemProps) => {
     return splittedDesc.join(" ");
   };
 
+  const formatTitle = (): string => {
+    return snippet.title.length > 80
+      ? snippet.title.substring(0, 80) + "..."
+      : snippet.title;
+  };
+
   return (
     <div className={styles.item}>
       <Link to="/someVideo">
@@ -35,7 +41,7 @@ export const VideoItem = ({ snippet }: VideoItemProps) => {
       </Link>
       <div className={styles.description}>
         <Link to="/someVideo">
-          <div className={styles.title}>{snippet.title}</div>
+          <div className={styles.title}>{formatTitle()}</div>
         </Link>
         <div className={styles.channel}>
           <a href={`https://www.youtube.com/channel/${snippet.channelId}`}>

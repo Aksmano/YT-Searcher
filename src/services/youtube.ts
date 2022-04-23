@@ -1,5 +1,5 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
-import { videoListResponse } from "./types";
+import { searchListResponse, videoListResponse } from "./types";
 
 export const apiSlice = createApi({
   baseQuery: fetchBaseQuery({
@@ -10,7 +10,12 @@ export const apiSlice = createApi({
       query: (queryParams) =>
         `videos?key=${process.env.REACT_APP_API_KEY}${queryParams}`,
     }),
+    getListSearchResult: builder.query<searchListResponse, string>({
+      query: (queryParams) =>
+        `search?key=${process.env.REACT_APP_API_KEY}${queryParams}`,
+    }),
   }),
 });
 
-export const { useGetListVideosResultQuery } = apiSlice;
+export const { useGetListVideosResultQuery, useGetListSearchResultQuery } =
+  apiSlice;

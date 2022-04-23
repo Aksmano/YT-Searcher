@@ -25,7 +25,7 @@ const initialState: videoQueryState = {
   part: ["snippet", "contentDetails", "statistics"],
   chart: "mostPopular",
   id: [],
-  maxResults: "10",
+  maxResults: "50",
 };
 
 let isAlreadyIn: boolean;

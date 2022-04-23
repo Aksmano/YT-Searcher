@@ -1,3 +1,8 @@
+.itemListContainer {
+  margin: 0rem 0 0 0;
+  transition: margin 0.25s;
+}
+
 .itemList {
   min-height: calc(100vh - 7rem);
   padding: 1.5rem;

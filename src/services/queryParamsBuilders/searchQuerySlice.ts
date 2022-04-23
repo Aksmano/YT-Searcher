@@ -43,6 +43,7 @@ export interface searchQueryState {
 const initialState: searchQueryState = {
   part: ["snippet"],
   type: ["video"],
+  maxResults: "10",
 };
 
 export const searchQuerySlice = createSlice({

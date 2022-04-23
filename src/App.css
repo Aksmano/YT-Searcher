@@ -1,12 +1,14 @@
 .App {
+  min-height: 100vh;
+  color: var(--text-primary);
   background-color: var(--background);
-  text-align: center;
+  font-size: large;
+  font-weight: bold;
+  transition: all 0.5s;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  width: 100vw;
-  height: 100vh;
 }
 
 .App-logo {

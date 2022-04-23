@@ -44,20 +44,8 @@ export type searchResult = {
   snippet: snippet;
 };
 
-type idSearchResult = {
-  kind: string;
-  videoId: string;
-  channelId: string;
-  playlistId: string;
-};
-
-type pageInfo = {
-  totalResults: number;
-  resultsPerPage: number;
-};
-
-type snippet = {
-  publishedAt: Date;
+export type snippet = {
+  publishedAt: string;
   channelId: string;
   title: string;
   description: string;
@@ -69,6 +57,18 @@ type snippet = {
   defaultLanguage: string;
   localized: localization;
   defaultAudioLanguage: string;
+};
+
+type idSearchResult = {
+  kind: string;
+  videoId: string;
+  channelId: string;
+  playlistId: string;
+};
+
+type pageInfo = {
+  totalResults: number;
+  resultsPerPage: number;
 };
 
 type thumbnail = {
@@ -87,7 +87,7 @@ type status = {
   failureReason: string;
   rejectionReason: string;
   privacyStatus: string;
-  publishAt: Date;
+  publishedAt: string;
   license: string;
   embeddable: boolean;
   publicStatsViewable: boolean;

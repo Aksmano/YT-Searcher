@@ -13,7 +13,7 @@ code {
 }
 
 :root {
-  --background: #f0f0f0;
+  --background: #d0d0d0;
   --tile-background: #fdfaf6;
   --tile-background-hover: #e7e4e0;
   --navbar-bkg-clr: #faf1e6;
@@ -25,7 +25,7 @@ code {
 
 [data-theme="dark"] {
   --background: #273131;
-  --tile-background: #2c3333;
+  --tile-background: #2c5555;
   --tile-background-hover: #3c4343;
   --navbar-bkg-clr: #395b64;
   --button-color: #3272e2;

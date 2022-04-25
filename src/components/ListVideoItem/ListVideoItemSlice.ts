@@ -23,9 +23,9 @@ export const ListVideoItemSlice = createSlice({
     togglePage: (state) => {
       state.pageToggler = !state.pageToggler;
     },
-    setCurrentPage: (state, action: PayloadAction<number>) => {
-      state.currentPage = action.payload;
-    },
+    // setCurrentPage: (state, action: PayloadAction<number>) => {
+    //   state.currentPage = action.payload;
+    // },
     setNewFetchedSnippets: (state, action: PayloadAction<snippet[]>) => {
       const newfetchedSnippets = action.payload.map((item) => {
         return item;
@@ -44,7 +44,7 @@ export const ListVideoItemSlice = createSlice({
 export const selectListVideoItem = (state: RootState) => state.ListVideoItem;
 
 export const {
-  setCurrentPage,
+  // setCurrentPage,
   setNewFetchedSnippets,
   addNewFetchedSnippets,
   togglePage,

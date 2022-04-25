@@ -7,7 +7,7 @@ import {
 } from "../../services/queryParamsBuilders/searchQuerySlice";
 import {
   selectListVideoItem,
-  setCurrentPage,
+  // setCurrentPage,
   togglePage,
 } from "../ListVideoItem/ListVideoItemSlice";
 import { selectSearchBar, setButtonState, setOn } from "./SearchBarSlice";

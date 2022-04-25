@@ -46,6 +46,8 @@ export const ListVideoItem = () => {
   });
 
   // console.log("videoList", videoList);
+  // console.log("videoQuery", videoQuery);
+
   // console.log(currentPage);
 
   const searchList = useGetListSearchResultQuery(queryBuilder(searchQuery), {
@@ -54,17 +56,17 @@ export const ListVideoItem = () => {
 
   const handleLoadMore = () => {
     setCurrentPage((page) => (page + 1) % 5);
-    if (currentPage === 0) {
-      if (shouldVideoBeListed)
-        dispatch(setVideoPageToken(videoList.data!.nextPageToken));
-      else dispatch(setSearchPageToken(searchList.data!.nextPageToken));
-    }
     setHasPaginationEnded(false);
     // console.log(searchList.data!.nextPageToken);
 
     // console.log(searchQuery);
     // console.log(searchBar.isSearching);
   };
+
+  // useEffect(() => {
+  //   console.log("handleLoadMore currentPage: ", currentPage);
+
+  // }, [currentPage]);
 
   // console.log("searchList", searchList);
 

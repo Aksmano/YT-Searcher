@@ -1,12 +1,14 @@
 import { useEffect } from "react";
 import { useAppDispatch, useAppSelector } from "../../app/hooks";
+import { setSearchPageToken } from "../../services/queryParamsBuilders/searchQuerySlice";
+import { setVideoPageToken } from "../../services/queryParamsBuilders/videoQuerySlice";
 import { searchResult, video, snippet } from "../../services/types";
 import { searchListResponse, videoListResponse } from "../../services/types";
 import { selectSearchBar } from "../SearchBar/SearchBarSlice";
 import {
   selectListVideoItem,
   setNewFetchedSnippets,
-  setCurrentPage,
+  // setCurrentPage,
 } from "./ListVideoItemSlice";
 
 interface useSetListProps {
@@ -24,7 +26,6 @@ export const useSetList = ({
 }: useSetListProps) => {
   const dispatch = useAppDispatch();
   const listVideoItem = useAppSelector(selectListVideoItem);
-  const searchBar = useAppSelector(selectSearchBar);
 
   useEffect(() => {
     if (data !== undefined && !isUninitialized) {
@@ -34,7 +35,7 @@ export const useSetList = ({
       for (let i = 0; i < 10; i++) {
         if (
           listVideoItem.fetchedSnippets.length + i ===
-          data.pageInfo.totalResults - 2
+          data.pageInfo.totalResults
         )
           break;
         newFetchedVideos.push(data!.items[currentPage * 10 + i].snippet);
@@ -42,16 +43,28 @@ export const useSetList = ({
 
       // if (data!.nextPageToken !== undefined)
       //   dispatch(setNewPage(data!.nextPageToken));
+      console.log("current page", currentPage);
+      console.log("prevPageToken", data!.prevPageToken);
 
-      if (data!.prevPageToken === undefined || currentPage === 0)
+      if (currentPage === 4) {
+        if (shouldVideoBeListed)
+          dispatch(setVideoPageToken(data!.nextPageToken));
+        else dispatch(setSearchPageToken(data!.nextPageToken));
+      }
+
+      if (data!.prevPageToken === undefined && currentPage === 0) {
+        console.log("new fetched videos");
         dispatch(setNewFetchedSnippets([...newFetchedVideos]));
-      else
+      } else {
+        console.log("adding videos");
+
         dispatch(
           setNewFetchedSnippets([
             ...listVideoItem.fetchedSnippets,
             ...newFetchedVideos,
           ])
         );
+      }
     }
     console.log(data);
   }, [data?.kind, currentPage, shouldVideoBeListed]);

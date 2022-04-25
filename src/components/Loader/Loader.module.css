@@ -1,0 +1,20 @@
+.ldsDualRing {
+  content: " ";
+  display: block;
+  width: 8rem;
+  height: 8rem;
+  /* margin: 5rem 0; */
+  border-radius: 50%;
+  border: 0.5rem solid var(--border-color);
+  border-color: var(--border-color) transparent var(--border-color) transparent;
+  animation: ldsDualRing 1.2s linear infinite;
+}
+
+@keyframes ldsDualRing {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}

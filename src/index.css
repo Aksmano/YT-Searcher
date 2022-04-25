@@ -33,3 +33,19 @@ code {
   --text-primary: #f5f2e7;
   --border-color: #f5f2e7;
 }
+
+button {
+  border-radius: 0.25rem;
+  color: var(--text-primary);
+  background-color: var(--button-color);
+  border: 0.125rem var(--text-primary) solid;
+  transition: all 0.15s;
+  width: 10rem;
+  font-size: 1rem;
+  font-weight: bold;
+}
+
+button:hover {
+  cursor: pointer;
+  background-color: var(--button-color-hover);
+}

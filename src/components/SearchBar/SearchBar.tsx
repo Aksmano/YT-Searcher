@@ -2,12 +2,14 @@ import { useEffect, useState } from "react";
 import { useAppSelector, useAppDispatch } from "../../app/hooks";
 import {
   selectSearchQuery,
-  newQueryTerm,
+  newSearchQueryTerm,
+  setSearchPageToken,
 } from "../../services/queryParamsBuilders/searchQuerySlice";
-import { setOn } from "./SearchBarSlice";
+import { selectSearchBar, setButtonState, setOn } from "./SearchBarSlice";
 
 export const SearchBar = () => {
   const searchQuery = useAppSelector(selectSearchQuery);
+  const searchBar = useAppSelector(selectSearchBar);
   const dispatch = useAppDispatch();
   const [queryTerm, setQueryTerm] = useState<string>("");
 
@@ -16,6 +18,10 @@ export const SearchBar = () => {
   // useEffect(() => {
   //   console.log("query useEffect searchBar", searchQuery);
   // }, [searchQuery]);
+
+  // useEffect(() => {
+  //   console.log(searchBar.isClicked);
+  // }, [searchBar]);
 
   return (
     <div>
@@ -30,10 +36,12 @@ export const SearchBar = () => {
       />
       <button
         onClick={(e) => {
-          dispatch(newQueryTerm(queryTerm));
-          dispatch(setOn());
-          console.log("queryTerm", queryTerm);
-          console.log("query searchBar", searchQuery);
+          console.log("CLICKED");
+          dispatch(setSearchPageToken(""));
+          dispatch(newSearchQueryTerm(queryTerm));
+          dispatch(setButtonState(true));
+          // console.log("queryTerm", queryTerm);
+          // console.log("query searchBar", searchQuery);
         }}
       >
         Search

@@ -1,0 +1,42 @@
+.navbar {
+  display: flex;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  justify-content: left;
+  background-color: var(--navbar-bkg-clr);
+  height: 3rem;
+  padding: 1rem;
+}
+
+.themeButton {
+  margin: 0 0 0 2rem;
+}
+
+.title {
+  display: flex;
+  text-align: center;
+  align-items: center;
+  margin: 0 0 0 2rem;
+  flex: 10;
+}
+
+.linkTitle {
+  color: var(--text-primary);
+  text-decoration: none;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  font-size: 2rem;
+}
+
+.divTitle {
+  margin: 0 0 0 2rem;
+}
+
+.title img {
+  margin: 0 0 0 0rem;
+  width: 4rem;
+  height: 4rem;
+}

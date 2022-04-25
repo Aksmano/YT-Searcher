@@ -7,6 +7,7 @@ import { selectSearchQuery } from "./services/queryParamsBuilders/searchQuerySli
 import { useGetListVideosResultQuery } from "./services/youtube";
 import useLocalStorage from "use-local-storage";
 import { ListVideoItem } from "./components/ListVideoItem/ListVideoItem";
+import Navbar from "./components/Navbar/Navbar";
 
 const App = () => {
   const defaultDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
@@ -33,6 +34,7 @@ const App = () => {
   return (
     <div className="App" data-theme={theme}>
       <button onClick={switchTheme}>Switch theme</button>
+      <Navbar switchTheme={switchTheme} />
       <SearchBar />
       {<ListVideoItem />}
       {/* {isLoading ? "" : <VideoItem snippet={data!.items[0].snippet} />} */}

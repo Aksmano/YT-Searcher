@@ -35,31 +35,40 @@ export const videoQuerySlice = createSlice({
   name: "videoQuery",
   initialState,
   reducers: {
-    addPart: (state, action: PayloadAction<string>) => {
+    addVideoPart: (state, action: PayloadAction<string>) => {
       isAlreadyIn =
         state.part.find((item) => action.payload === item) === action.payload;
       if (!isAlreadyIn) state.part.push(action.payload);
     },
-    delPart: (state, action: PayloadAction<string>) => {
+    delVideoPart: (state, action: PayloadAction<string>) => {
       state.part = state.part.filter((value, index, arr) => {
         return value !== action.payload;
       });
     },
-    addId: (state, action: PayloadAction<string>) => {
+    addVideoId: (state, action: PayloadAction<string>) => {
       isAlreadyIn =
         state.id.find((item) => action.payload === item) === action.payload;
       if (isAlreadyIn) state.id.push(action.payload);
     },
-    delId: (state, action: PayloadAction<string>) => {
+    delVideoId: (state, action: PayloadAction<string>) => {
       state.id = state.id.filter((value, index, arr) => {
         return value !== action.payload;
       });
+    },
+    setVideoPageToken: (state, action: PayloadAction<string>) => {
+      state.pageToken = action.payload;
     },
   },
 });
 
 export const selectVideoQuery = (state: RootState) => state.videoQuery;
 
-export const { addPart, delPart, addId, delId } = videoQuerySlice.actions;
+export const {
+  addVideoPart,
+  delVideoPart,
+  addVideoId,
+  delVideoId,
+  setVideoPageToken,
+} = videoQuerySlice.actions;
 
 export default videoQuerySlice.reducer;

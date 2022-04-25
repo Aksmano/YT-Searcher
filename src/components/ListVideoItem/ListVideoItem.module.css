@@ -12,3 +12,14 @@
   justify-content: center;
   align-content: center;
 }
+
+.buttonContainer {
+  display: flex;
+  width: 100%;
+  justify-content: center;
+}
+
+.loadMore {
+  padding: 1rem 1.5rem;
+  margin: 2rem;
+}

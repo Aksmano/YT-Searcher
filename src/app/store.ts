@@ -3,6 +3,7 @@ import { apiSlice } from "../services/youtube";
 import videoQueryReducer from "../services/queryParamsBuilders/videoQuerySlice";
 import searchQueryReducer from "../services/queryParamsBuilders/searchQuerySlice";
 import searchBarSlice from "../components/SearchBar/SearchBarSlice";
+import ListVideoItemSlice from "../components/ListVideoItem/ListVideoItemSlice";
 
 export const store = configureStore({
   reducer: {
@@ -10,6 +11,7 @@ export const store = configureStore({
     videoQuery: videoQueryReducer,
     searchQuery: searchQueryReducer,
     searchBar: searchBarSlice,
+    ListVideoItem: ListVideoItemSlice,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware().concat(apiSlice.middleware),

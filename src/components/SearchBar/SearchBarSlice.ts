@@ -19,11 +19,14 @@ export const searchBarSlice = createSlice({
     setOff: (state) => {
       state.isClicked = false;
     },
+    setButtonState: (state, action: PayloadAction<boolean>) => {
+      state.isClicked = action.payload;
+    },
   },
 });
 
-export const selectsearchBar = (state: RootState) => state.searchBar;
+export const selectSearchBar = (state: RootState) => state.searchBar;
 
-export const { setOn, setOff } = searchBarSlice.actions;
+export const { setOn, setOff, setButtonState } = searchBarSlice.actions;
 
 export default searchBarSlice.reducer;

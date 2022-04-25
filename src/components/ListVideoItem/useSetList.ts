@@ -2,25 +2,33 @@ import { useEffect } from "react";
 import { useAppDispatch, useAppSelector } from "../../app/hooks";
 import { searchResult, video, snippet } from "../../services/types";
 import { searchListResponse, videoListResponse } from "../../services/types";
+import { selectSearchBar } from "../SearchBar/SearchBarSlice";
 import {
   selectListVideoItem,
   setNewFetchedSnippets,
-  setNewPage,
+  setCurrentPage,
 } from "./ListVideoItemSlice";
 
 interface useSetListProps {
   data: videoListResponse | searchListResponse | undefined;
+  isUninitialized: boolean;
   currentPage: number;
   shouldVideoBeListed: boolean;
 }
 
-export const useSetList = ({ data, currentPage }: useSetListProps) => {
+export const useSetList = ({
+  data,
+  currentPage,
+  isUninitialized,
+  shouldVideoBeListed,
+}: useSetListProps) => {
   const dispatch = useAppDispatch();
   const listVideoItem = useAppSelector(selectListVideoItem);
+  const searchBar = useAppSelector(selectSearchBar);
 
   useEffect(() => {
-    if (data !== undefined) {
-      console.log("FROM useSetList");
+    if (data !== undefined && !isUninitialized) {
+      console.log("FROM useSetList", data.kind);
 
       let newFetchedVideos: snippet[] = [];
       for (let i = 0; i < 10; i++) {
@@ -32,10 +40,10 @@ export const useSetList = ({ data, currentPage }: useSetListProps) => {
         newFetchedVideos.push(data!.items[currentPage * 10 + i].snippet);
       }
 
-      if (data!.nextPageToken !== undefined)
-        dispatch(setNewPage(data!.nextPageToken));
+      // if (data!.nextPageToken !== undefined)
+      //   dispatch(setNewPage(data!.nextPageToken));
 
-      if (data!.prevPageToken === undefined && currentPage === 0)
+      if (data!.prevPageToken === undefined || currentPage === 0)
         dispatch(setNewFetchedSnippets([...newFetchedVideos]));
       else
         dispatch(
@@ -46,5 +54,5 @@ export const useSetList = ({ data, currentPage }: useSetListProps) => {
         );
     }
     console.log(data);
-  }, [data?.kind, currentPage]);
+  }, [data?.kind, currentPage, shouldVideoBeListed]);
 };

@@ -5,6 +5,11 @@ import {
   newSearchQueryTerm,
   setSearchPageToken,
 } from "../../services/queryParamsBuilders/searchQuerySlice";
+import {
+  selectListVideoItem,
+  setCurrentPage,
+  togglePage,
+} from "../ListVideoItem/ListVideoItemSlice";
 import { selectSearchBar, setButtonState, setOn } from "./SearchBarSlice";
 
 export const SearchBar = () => {
@@ -39,6 +44,7 @@ export const SearchBar = () => {
           console.log("CLICKED");
           dispatch(setSearchPageToken(""));
           dispatch(newSearchQueryTerm(queryTerm));
+          dispatch(togglePage());
           dispatch(setOn());
           // console.log("queryTerm", queryTerm);
           // console.log("query searchBar", searchQuery);

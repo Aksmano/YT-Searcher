@@ -15,7 +15,7 @@ import {
   selectSearchQuery,
   setSearchPageToken,
 } from "../../services/queryParamsBuilders/searchQuerySlice";
-import { selectSearchBar } from "../SearchBar/SearchBarSlice";
+import { selectSearchBar, setOff } from "../SearchBar/SearchBarSlice";
 import { useSetList } from "./useSetList";
 import { selectListVideoItem } from "./ListVideoItemSlice";
 import Loader from "../Loader/Loader";
@@ -45,8 +45,8 @@ export const ListVideoItem = () => {
     skip: shouldVideoBeListed === false,
   });
 
-  console.log("videoList", videoList);
-  console.log(currentPage);
+  // console.log("videoList", videoList);
+  // console.log(currentPage);
 
   const searchList = useGetListSearchResultQuery(queryBuilder(searchQuery), {
     skip: shouldVideoBeListed === true,
@@ -68,17 +68,33 @@ export const ListVideoItem = () => {
 
   // console.log("searchList", searchList);
 
-  useSetList({ data: videoList.data, currentPage, shouldVideoBeListed });
-  useSetList({ data: searchList.data, currentPage, shouldVideoBeListed });
+  useEffect(() => {
+    setCurrentPage(0);
+    console.log("toggled");
+  }, [listVideoItem.pageToggler]);
+
+  useSetList({
+    data: videoList.data,
+    isUninitialized: videoList.isUninitialized,
+    currentPage,
+    shouldVideoBeListed,
+  });
+  useSetList({
+    data: searchList.data,
+    isUninitialized: searchList.isUninitialized,
+    currentPage,
+    shouldVideoBeListed,
+  });
+  // console.log(listVideoItem);
 
   useEffect(() => {
     if (searchBar.isSearching) setShouldVideoBeListed(false);
     else {
+      // dispatch(setOff());
       setShouldVideoBeListed(true);
       setVideoPageToken("");
-      setCurrentPage(0);
-      console.log("from here !!!!!!!!!!!!!!!");
     }
+    setCurrentPage(0);
     console.log("ShouldVideoBeListed:", shouldVideoBeListed);
   }, [searchBar.isSearching]);
 

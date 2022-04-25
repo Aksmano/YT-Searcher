@@ -4,9 +4,10 @@ import styles from "./VideoItem.module.css";
 
 interface VideoItemProps {
   snippet: snippet;
+  videoId: string;
 }
 
-export const VideoItem = ({ snippet }: VideoItemProps) => {
+export const VideoItem = ({ snippet, videoId }: VideoItemProps) => {
   const formatDate = (): string => {
     const date = snippet.publishedAt.split("T", 2);
     return `${date[0]}, ${date[1].substring(0, 5)}`;
@@ -30,7 +31,7 @@ export const VideoItem = ({ snippet }: VideoItemProps) => {
 
   return (
     <div className={styles.item}>
-      <Link to="/someVideo">
+      <Link to={`/${videoId}`}>
         <img
           src={snippet.thumbnails["medium"]!.url}
           className={styles.thumbnail}
@@ -40,7 +41,7 @@ export const VideoItem = ({ snippet }: VideoItemProps) => {
         />
       </Link>
       <div className={styles.description}>
-        <Link to="/:id">
+        <Link to={`/${videoId}`}>
           <div className={styles.title}>{formatTitle()}</div>
         </Link>
         <div className={styles.channel}>

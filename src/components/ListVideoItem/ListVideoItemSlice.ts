@@ -5,10 +5,15 @@ import { RootState } from "../../app/store";
 import { snippet } from "../../services/types";
 
 export interface ListVideoItemState {
-  fetchedSnippets: snippet[];
+  fetchedSnippets: extendedSnippet[];
   pageToggler: boolean;
   toMostPopularToggler: boolean;
   wasUpdated: boolean;
+}
+
+export interface extendedSnippet {
+  snippet: snippet;
+  videoId: string;
 }
 
 const initialState: ListVideoItemState = {
@@ -34,13 +39,19 @@ export const ListVideoItemSlice = createSlice({
     // setCurrentPage: (state, action: PayloadAction<number>) => {
     //   state.currentPage = action.payload;
     // },
-    setNewFetchedSnippets: (state, action: PayloadAction<snippet[]>) => {
+    setNewFetchedSnippets: (
+      state,
+      action: PayloadAction<extendedSnippet[]>
+    ) => {
       const newfetchedSnippets = action.payload.map((item) => {
         return item;
       });
       state.fetchedSnippets = [...newfetchedSnippets];
     },
-    addNewFetchedSnippets: (state, action: PayloadAction<snippet[]>) => {
+    addNewFetchedSnippets: (
+      state,
+      action: PayloadAction<extendedSnippet[]>
+    ) => {
       const newfetchedSnippets = action.payload.map((item) => {
         return item;
       });

@@ -6,9 +6,11 @@ import { searchResult, video, snippet } from "../../services/types";
 import { searchListResponse, videoListResponse } from "../../services/types";
 import { selectSearchBar } from "../SearchBar/SearchBarSlice";
 import {
+  extendedSnippet,
   selectListVideoItem,
   setNewFetchedSnippets,
   setUpdate,
+
   // setCurrentPage,
 } from "./ListVideoItemSlice";
 
@@ -32,20 +34,37 @@ export const useSetList = ({
   const listVideoItem = useAppSelector(selectListVideoItem);
   // const isPageTokenSet = useRef<boolean>(false);
 
+  const isEndOfItems = (
+    i: number,
+    data: videoListResponse | searchListResponse
+  ): boolean => {
+    return (
+      listVideoItem.fetchedSnippets.length + i === data.pageInfo.totalResults
+    );
+  };
+
   useEffect(() => {
     console.log("FROM useSetList", data?.kind);
     if (data !== undefined && !isUninitialized && !isFetching) {
       dispatch(setUpdate(true));
       let isPageTokenSet = false;
-      let newFetchedVideos: snippet[] = [];
+      let newFetchedVideos: extendedSnippet[] = [];
+      let snippetData: snippet;
+      console.log(typeof data);
 
       for (let i = 0; i < 10; i++) {
-        if (
-          listVideoItem.fetchedSnippets.length + i ===
-          data.pageInfo.totalResults
-        )
-          break;
-        newFetchedVideos.push(data!.items[currentPage * 10 + i].snippet);
+        if (isEndOfItems(i, data)) break;
+        snippetData = data!.items[currentPage * 10 + i].snippet;
+        if (data.kind === "youtube#videoListResponse")
+          newFetchedVideos.push({
+            snippet: snippetData,
+            videoId: data!.items[currentPage * 10 + i].id,
+          });
+        else if ((data.kind = "youtube#searchListResponse"))
+          newFetchedVideos.push({
+            snippet: snippetData,
+            videoId: data!.items[currentPage * 10 + i].id.videoId,
+          });
       }
 
       // if (data!.nextPageToken !== undefined)

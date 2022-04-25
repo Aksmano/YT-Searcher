@@ -180,7 +180,13 @@ export const ListVideoItem = () => {
       prevItemQuantity.current = listVideoItem.fetchedSnippets.length;
       const newVideoItemsList = listVideoItem.fetchedSnippets.map((item) => {
         key.current++;
-        return <VideoItem snippet={item} key={key.current} />;
+        return (
+          <VideoItem
+            snippet={item.snippet}
+            videoId={item.videoId}
+            key={key.current}
+          />
+        );
       });
       setVideoItemsList([...newVideoItemsList]);
     }

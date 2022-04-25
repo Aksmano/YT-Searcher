@@ -24,6 +24,7 @@ import {
 } from "./ListVideoItemSlice";
 import Loader from "../Loader/Loader";
 import { useLocation } from "react-router-dom";
+import { usePaginationEnd } from "./usePaginationEnd";
 
 export const ListVideoItem = () => {
   const listVideoItem = useAppSelector(selectListVideoItem);
@@ -37,11 +38,34 @@ export const ListVideoItem = () => {
   const [hasSettingVideoItemsEnded, setHasSettingVideoItemsEnded] =
     useState<boolean>(false);
   const [currentPage, setCurrentPage] = useState<number>(0);
-  const [hasPaginationEnded, setHasPaginationEnded] = useState<boolean>(true);
+  // const [hasPaginationEnded, setHasPaginationEnded] = useState<boolean>(true);
   const [shouldVideoBeListed, setShouldVideoBeListed] = useState<boolean>(true);
 
   const key = useRef<number>(0);
   const prevItemQuantity = useRef<number>(0);
+
+  const shouldButtonLoad = (): boolean => {
+    return (
+      (videoList.isUninitialized === false && videoList.isFetching === false) ||
+      (searchList.isUninitialized === false && searchList.isFetching === false)
+    );
+  };
+
+  const shouldButtonRender = (): boolean => {
+    return (
+      listVideoItem.fetchedSnippets.length === 0 ||
+      listVideoItem.fetchedSnippets.length ===
+        (videoList.data?.pageInfo.totalResults ||
+          searchList.data?.pageInfo.totalResults)
+    );
+  };
+
+  const shouldVideosRender = (): boolean => {
+    return (
+      (videoList.isLoading === false && videoList.isFetching === false) ||
+      (searchList.isLoading === false && searchList.isFetching === false)
+    );
+  };
 
   // const location = useLocation();
   // console.log(location.pathname);
@@ -50,7 +74,7 @@ export const ListVideoItem = () => {
     skip: shouldVideoBeListed === false,
   });
 
-  console.log("videoList", videoList);
+  // console.log("videoList", videoList);
   // console.log("videoQuery", videoQuery);
 
   // console.log(currentPage);
@@ -62,8 +86,10 @@ export const ListVideoItem = () => {
   // console.log("searchList", searchList);
 
   const handleLoadMore = () => {
+    console.log("CLICKED LOAD MORE");
+
     setCurrentPage((page) => (page + 1) % 5);
-    setHasPaginationEnded(false);
+    // setHasPaginationEnded(false);
   };
 
   useEffect(() => {
@@ -71,14 +97,20 @@ export const ListVideoItem = () => {
     else setCurrentPage(0);
     dispatch(setUpdate(false));
     console.log(videoQuery);
+    console.log(searchQuery, searchList);
 
     prevItemQuantity.current = 0;
     console.log("toggled", prevItemQuantity.current);
-  }, [listVideoItem.pageToggler, searchBar.isSearching]);
+  }, [
+    listVideoItem.pageToggler,
+    searchBar.searchToggler,
+    searchList.isFetching,
+  ]);
 
   useSetList({
     data: videoList.data,
     isUninitialized: videoList.isUninitialized,
+    isFetching: videoList.isFetching,
     currentPage,
     shouldVideoBeListed,
   });
@@ -86,16 +118,29 @@ export const ListVideoItem = () => {
   useSetList({
     data: searchList.data,
     isUninitialized: searchList.isUninitialized,
+    isFetching: searchList.isFetching,
     currentPage,
     shouldVideoBeListed,
   });
   // console.log(listVideoItem);
 
-  useEffect(() => {
-    if (videoList.isFetching || searchList.isFetching)
-      setHasPaginationEnded(false);
-    else setHasPaginationEnded(true);
-  }, [videoList.isFetching, searchList.isFetching]);
+  // usePaginationEnd({
+  //   isFetching: videoList.isFetching,
+  //   setHasPaginationEnded,
+  // });
+
+  // usePaginationEnd({
+  //   isFetching: searchList.isFetching,
+  //   setHasPaginationEnded,
+  // });
+
+  // console.log(hasPaginationEnded);
+
+  // useEffect(() => {
+  //   if (videoList.isFetching || searchList.isFetching)
+  //     setHasPaginationEnded(false);
+  //   else setHasPaginationEnded(true);
+  // }, [videoList.isFetching, searchList.isFetching]);
 
   useEffect(() => {
     if (searchBar.isSearching) {
@@ -111,19 +156,20 @@ export const ListVideoItem = () => {
   }, [searchBar.isSearching]);
 
   useEffect(() => {
-    if (hasPaginationEnded) {
-      console.log("???");
-      setHasSettingVideoItemsEnded(false);
-      // setCurrentPage(0);
-    }
+    // if (searchQuery) {
+    console.log("???");
+    setHasSettingVideoItemsEnded(false);
+
+    // setCurrentPage(0);
+    // }
   }, [searchQuery]);
 
   useEffect(() => {
-    console.log(
-      "IM HERE",
-      listVideoItem.fetchedSnippets,
-      listVideoItem.wasUpdated
-    );
+    // console.log(
+    //   "IM HERE",
+    //   listVideoItem.fetchedSnippets,
+    //   listVideoItem.wasUpdated
+    // );
     setHasSettingVideoItemsEnded(false);
     if (
       listVideoItem.wasUpdated &&
@@ -138,7 +184,7 @@ export const ListVideoItem = () => {
       });
       setVideoItemsList([...newVideoItemsList]);
     }
-    setHasPaginationEnded(true);
+    // setHasPaginationEnded(true);
     setHasSettingVideoItemsEnded(true);
   }, [listVideoItem.fetchedSnippets, currentPage]);
 
@@ -147,11 +193,8 @@ export const ListVideoItem = () => {
       <div className={styles.itemList}>
         {hasSettingVideoItemsEnded ? videoItemsList : <Loader />}
         <div className={styles.buttonContainer}>
-          {hasPaginationEnded ? (
-            listVideoItem.fetchedSnippets.length === 0 ||
-            listVideoItem.fetchedSnippets.length ===
-              (videoList.data?.pageInfo.totalResults ||
-                searchList.data?.pageInfo.totalResults) ? (
+          {shouldButtonLoad() && hasSettingVideoItemsEnded ? (
+            shouldButtonRender() ? (
               ""
             ) : (
               <button

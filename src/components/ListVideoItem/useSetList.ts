@@ -9,13 +9,13 @@ import {
   selectListVideoItem,
   setNewFetchedSnippets,
   setUpdate,
-  togglePage,
   // setCurrentPage,
 } from "./ListVideoItemSlice";
 
 interface useSetListProps {
   data: videoListResponse | searchListResponse | undefined;
   isUninitialized: boolean;
+  isFetching: boolean;
   currentPage: number;
   shouldVideoBeListed: boolean;
 }
@@ -25,6 +25,7 @@ export const useSetList = ({
   currentPage,
   isUninitialized,
   shouldVideoBeListed,
+  isFetching,
 }: useSetListProps) => {
   const dispatch = useAppDispatch();
   const searchBar = useAppSelector(selectSearchBar);
@@ -33,7 +34,7 @@ export const useSetList = ({
 
   useEffect(() => {
     console.log("FROM useSetList", data?.kind);
-    if (data !== undefined && !isUninitialized) {
+    if (data !== undefined && !isUninitialized && !isFetching) {
       dispatch(setUpdate(true));
       let isPageTokenSet = false;
       let newFetchedVideos: snippet[] = [];

@@ -17,7 +17,11 @@ import {
 } from "../../services/queryParamsBuilders/searchQuerySlice";
 import { selectSearchBar, setOff } from "../SearchBar/SearchBarSlice";
 import { useSetList } from "./useSetList";
-import { selectListVideoItem } from "./ListVideoItemSlice";
+import {
+  selectListVideoItem,
+  setUpdate,
+  toggleBackToMostPopular,
+} from "./ListVideoItemSlice";
 import Loader from "../Loader/Loader";
 import { useLocation } from "react-router-dom";
 
@@ -37,6 +41,7 @@ export const ListVideoItem = () => {
   const [shouldVideoBeListed, setShouldVideoBeListed] = useState<boolean>(true);
 
   const key = useRef<number>(0);
+  const prevItemQuantity = useRef<number>(0);
 
   // const location = useLocation();
   // console.log(location.pathname);
@@ -45,7 +50,7 @@ export const ListVideoItem = () => {
     skip: shouldVideoBeListed === false,
   });
 
-  // console.log("videoList", videoList);
+  console.log("videoList", videoList);
   // console.log("videoQuery", videoQuery);
 
   // console.log(currentPage);
@@ -54,7 +59,7 @@ export const ListVideoItem = () => {
     skip: shouldVideoBeListed === true,
   });
 
-  console.log("searchList", searchList);
+  // console.log("searchList", searchList);
 
   const handleLoadMore = () => {
     setCurrentPage((page) => (page + 1) % 5);
@@ -62,8 +67,13 @@ export const ListVideoItem = () => {
   };
 
   useEffect(() => {
-    setCurrentPage(0);
-    console.log("toggled");
+    if (currentPage === 0) dispatch(toggleBackToMostPopular());
+    else setCurrentPage(0);
+    dispatch(setUpdate(false));
+    console.log(videoQuery);
+
+    prevItemQuantity.current = 0;
+    console.log("toggled", prevItemQuantity.current);
   }, [listVideoItem.pageToggler, searchBar.isSearching]);
 
   useSetList({
@@ -72,6 +82,7 @@ export const ListVideoItem = () => {
     currentPage,
     shouldVideoBeListed,
   });
+
   useSetList({
     data: searchList.data,
     isUninitialized: searchList.isUninitialized,
@@ -79,6 +90,12 @@ export const ListVideoItem = () => {
     shouldVideoBeListed,
   });
   // console.log(listVideoItem);
+
+  useEffect(() => {
+    if (videoList.isFetching || searchList.isFetching)
+      setHasPaginationEnded(false);
+    else setHasPaginationEnded(true);
+  }, [videoList.isFetching, searchList.isFetching]);
 
   useEffect(() => {
     if (searchBar.isSearching) {
@@ -102,17 +119,27 @@ export const ListVideoItem = () => {
   }, [searchQuery]);
 
   useEffect(() => {
-    console.log("IM HERE", listVideoItem.fetchedSnippets);
+    console.log(
+      "IM HERE",
+      listVideoItem.fetchedSnippets,
+      listVideoItem.wasUpdated
+    );
     setHasSettingVideoItemsEnded(false);
-    if (listVideoItem.fetchedSnippets.length > 0) {
+    if (
+      listVideoItem.wasUpdated &&
+      listVideoItem.fetchedSnippets.length > prevItemQuantity.current
+    ) {
+      console.log("DO YOU COPY");
+
+      prevItemQuantity.current = listVideoItem.fetchedSnippets.length;
       const newVideoItemsList = listVideoItem.fetchedSnippets.map((item) => {
         key.current++;
         return <VideoItem snippet={item} key={key.current} />;
       });
       setVideoItemsList([...newVideoItemsList]);
-      setHasSettingVideoItemsEnded(true);
-      setHasPaginationEnded(true);
     }
+    setHasPaginationEnded(true);
+    setHasSettingVideoItemsEnded(true);
   }, [listVideoItem.fetchedSnippets, currentPage]);
 
   return (

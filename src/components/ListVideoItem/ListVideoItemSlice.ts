@@ -7,13 +7,15 @@ import { snippet } from "../../services/types";
 export interface ListVideoItemState {
   fetchedSnippets: snippet[];
   pageToggler: boolean;
-  currentPage: number;
+  toMostPopularToggler: boolean;
+  wasUpdated: boolean;
 }
 
 const initialState: ListVideoItemState = {
   fetchedSnippets: [],
   pageToggler: true,
-  currentPage: 0,
+  wasUpdated: false,
+  toMostPopularToggler: false,
 };
 
 export const ListVideoItemSlice = createSlice({
@@ -22,6 +24,12 @@ export const ListVideoItemSlice = createSlice({
   reducers: {
     togglePage: (state) => {
       state.pageToggler = !state.pageToggler;
+    },
+    toggleBackToMostPopular: (state) => {
+      state.toMostPopularToggler = !state.toMostPopularToggler;
+    },
+    setUpdate: (state, action: PayloadAction<boolean>) => {
+      state.wasUpdated = action.payload;
     },
     // setCurrentPage: (state, action: PayloadAction<number>) => {
     //   state.currentPage = action.payload;
@@ -45,9 +53,11 @@ export const selectListVideoItem = (state: RootState) => state.ListVideoItem;
 
 export const {
   // setCurrentPage,
+  setUpdate,
   setNewFetchedSnippets,
   addNewFetchedSnippets,
   togglePage,
+  toggleBackToMostPopular,
 } = ListVideoItemSlice.actions;
 
 export default ListVideoItemSlice.reducer;

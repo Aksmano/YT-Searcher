@@ -8,6 +8,7 @@ import { selectSearchBar } from "../SearchBar/SearchBarSlice";
 import {
   selectListVideoItem,
   setNewFetchedSnippets,
+  setUpdate,
   togglePage,
   // setCurrentPage,
 } from "./ListVideoItemSlice";
@@ -31,8 +32,9 @@ export const useSetList = ({
   // const isPageTokenSet = useRef<boolean>(false);
 
   useEffect(() => {
+    console.log("FROM useSetList", data?.kind);
     if (data !== undefined && !isUninitialized) {
-      console.log("FROM useSetList", data.kind);
+      dispatch(setUpdate(true));
       let isPageTokenSet = false;
       let newFetchedVideos: snippet[] = [];
 
@@ -77,7 +79,12 @@ export const useSetList = ({
           ])
         );
       }
-    }
+    } else if (!isUninitialized) dispatch(setUpdate(false));
     console.log(data);
-  }, [data?.kind, currentPage, shouldVideoBeListed]);
+  }, [
+    data?.kind,
+    currentPage,
+    shouldVideoBeListed,
+    listVideoItem.toMostPopularToggler,
+  ]);
 };

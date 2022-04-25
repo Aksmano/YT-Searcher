@@ -40,7 +40,7 @@ export const VideoItem = ({ snippet }: VideoItemProps) => {
         />
       </Link>
       <div className={styles.description}>
-        <Link to="/someVideo">
+        <Link to="/:id">
           <div className={styles.title}>{formatTitle()}</div>
         </Link>
         <div className={styles.channel}>

@@ -2,11 +2,11 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { RootState } from "../../app/store";
 
 export interface searchBarState {
-  isClicked: boolean;
+  isSearching: boolean;
 }
 
 const initialState: searchBarState = {
-  isClicked: false,
+  isSearching: false,
 };
 
 export const searchBarSlice = createSlice({
@@ -14,13 +14,13 @@ export const searchBarSlice = createSlice({
   initialState,
   reducers: {
     setOn: (state) => {
-      state.isClicked = true;
+      state.isSearching = true;
     },
     setOff: (state) => {
-      state.isClicked = false;
+      state.isSearching = false;
     },
     setButtonState: (state, action: PayloadAction<boolean>) => {
-      state.isClicked = action.payload;
+      state.isSearching = action.payload;
     },
   },
 });

@@ -39,7 +39,7 @@ export const SearchBar = () => {
           console.log("CLICKED");
           dispatch(setSearchPageToken(""));
           dispatch(newSearchQueryTerm(queryTerm));
-          dispatch(setButtonState(true));
+          dispatch(setOn());
           // console.log("queryTerm", queryTerm);
           // console.log("query searchBar", searchQuery);
         }}

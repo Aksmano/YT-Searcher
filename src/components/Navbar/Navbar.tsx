@@ -1,10 +1,10 @@
 import styles from "./Navbar.module.css";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import logo from "../../img/yt.png";
 import { useAppDispatch } from "../../app/hooks";
 import { setOff } from "../SearchBar/SearchBarSlice";
 import { SearchBar } from "../SearchBar/SearchBar";
-import { togglePage } from "../ListVideoItem/ListVideoItemSlice";
+import { setUpdate, togglePage } from "../ListVideoItem/ListVideoItemSlice";
 import { setVideoPageToken } from "../../services/queryParamsBuilders/videoQuerySlice";
 
 interface NavbarProps {
@@ -13,6 +13,8 @@ interface NavbarProps {
 
 const Navbar = ({ switchTheme }: NavbarProps) => {
   const dispatch = useAppDispatch();
+  const navigate = useNavigate();
+
   return (
     <nav className={styles.navbar}>
       <div
@@ -21,6 +23,8 @@ const Navbar = ({ switchTheme }: NavbarProps) => {
           dispatch(setOff());
           dispatch(setVideoPageToken(""));
           dispatch(togglePage());
+          // dispatch(setUpdate(false));
+          navigate("/");
           console.log("CLICKED LOGO");
         }}
       >

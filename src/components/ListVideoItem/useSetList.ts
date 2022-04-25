@@ -58,12 +58,12 @@ export const useSetList = ({
         if (data.kind === "youtube#videoListResponse")
           newFetchedVideos.push({
             snippet: snippetData,
-            videoId: data!.items[currentPage * 10 + i].id,
+            id: data!.items[currentPage * 10 + i].id,
           });
-        else if ((data.kind = "youtube#searchListResponse"))
+        else if (data.kind === "youtube#searchListResponse")
           newFetchedVideos.push({
             snippet: snippetData,
-            videoId: data!.items[currentPage * 10 + i].id.videoId,
+            id: data!.items[currentPage * 10 + i].id.videoId,
           });
       }
 
@@ -87,7 +87,7 @@ export const useSetList = ({
         data!.prevPageToken === undefined &&
         currentPage === 0
       ) {
-        console.log("new fetched videos");
+        console.log("new fetched videos", newFetchedVideos);
         dispatch(setNewFetchedSnippets([...newFetchedVideos]));
       } else {
         console.log("adding videos");

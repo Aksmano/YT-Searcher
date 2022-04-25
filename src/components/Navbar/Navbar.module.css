@@ -33,10 +33,16 @@
 
 .divTitle {
   margin: 0 0 0 2rem;
+  font-size: 2rem;
 }
 
 .title img {
   margin: 0 0 0 0rem;
   width: 4rem;
   height: 4rem;
+}
+
+.title img:hover,
+.divTitle:hover {
+  cursor: pointer;
 }

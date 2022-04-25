@@ -1,0 +1,4 @@
+.videoDetails {
+  display: flex;
+  flex-direction: row;
+}

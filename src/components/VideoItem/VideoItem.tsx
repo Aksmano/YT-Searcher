@@ -1,6 +1,7 @@
 import { snippet, video } from "../../services/types";
 import { Link } from "react-router-dom";
 import styles from "./VideoItem.module.css";
+import { decode } from "html-entities";
 
 interface VideoItemProps {
   snippet: snippet;
@@ -14,13 +15,9 @@ export const VideoItem = ({ snippet, videoId }: VideoItemProps) => {
   };
 
   const formatDescription = (): string => {
-    const splittedDesc = snippet.description.replace("\n", "<br>").split(" ");
-    let result = "";
-    let index = 0;
-    let letterCounter;
-    for (let i = 0; i < 4; i++) {}
-
-    return splittedDesc.join(" ");
+    return snippet.description.length > 170
+      ? snippet.description.substring(0, 170) + "..."
+      : snippet.description;
   };
 
   const formatTitle = (): string => {
@@ -31,7 +28,7 @@ export const VideoItem = ({ snippet, videoId }: VideoItemProps) => {
 
   return (
     <div className={styles.item}>
-      <Link to={`/${videoId}`}>
+      <Link to={`/video/${videoId}`}>
         <img
           src={snippet.thumbnails["medium"]!.url}
           className={styles.thumbnail}
@@ -41,15 +38,17 @@ export const VideoItem = ({ snippet, videoId }: VideoItemProps) => {
         />
       </Link>
       <div className={styles.description}>
-        <Link to={`/${videoId}`}>
-          <div className={styles.title}>{formatTitle()}</div>
+        <Link to={`/video/${videoId}`}>
+          <div className={styles.title}>{decode(formatTitle())}</div>
         </Link>
         <div className={styles.channel}>
           <a href={`https://www.youtube.com/channel/${snippet.channelId}`}>
             {snippet.channelTitle}
           </a>
         </div>
-        {/* <div>{formatDescription()}</div> */}
+        <div className={styles.textDescription}>
+          {decode(formatDescription())}
+        </div>
         <div className={styles.publisedAt}>Published at: {formatDate()}</div>
       </div>
     </div>

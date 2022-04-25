@@ -13,7 +13,7 @@ export interface ListVideoItemState {
 
 export interface extendedSnippet {
   snippet: snippet;
-  videoId: string;
+  id: string;
 }
 
 const initialState: ListVideoItemState = {

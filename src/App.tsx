@@ -6,6 +6,8 @@ import { useGetListVideosResultQuery } from "./services/youtube";
 import useLocalStorage from "use-local-storage";
 import { ListVideoItem } from "./components/ListVideoItem/ListVideoItem";
 import Navbar from "./components/Navbar/Navbar";
+import { Routes, Route } from "react-router-dom";
+import { VideoDetails } from "./components/VideoDetails/VideoDetails";
 
 const App = () => {
   const defaultDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
@@ -31,15 +33,11 @@ const App = () => {
 
   return (
     <div className="App" data-theme={theme}>
-      <button onClick={switchTheme}>Switch theme</button>
       <Navbar switchTheme={switchTheme} />
-      {<ListVideoItem />}
-      {/* {isLoading ? "" : <VideoItem snippet={data!.items[0].snippet} />} */}
-      {/* <img src={data?.items[0].snippet.thumbnails["high"]?.url} alt="" />
-      {data?.items[0].snippet.title} */}
-      {/* {() => {
-        if (!isLoading) console.log(data!.items[0].snippet);
-      }} */}
+      <Routes>
+        <Route path="/" element={<ListVideoItem />}></Route>
+        <Route path="/video/:id" element={<VideoDetails />} />
+      </Routes>
     </div>
   );
 };

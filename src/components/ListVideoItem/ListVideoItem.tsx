@@ -15,7 +15,7 @@ import {
   selectSearchQuery,
   setSearchPageToken,
 } from "../../services/queryParamsBuilders/searchQuerySlice";
-import { selectSearchBar, setOff } from "../SearchBar/SearchBarSlice";
+import { selectSearchBar } from "../SearchBar/SearchBarSlice";
 import { useSetList } from "./useSetList";
 import {
   selectListVideoItem,
@@ -23,8 +23,6 @@ import {
   toggleBackToMostPopular,
 } from "./ListVideoItemSlice";
 import Loader from "../Loader/Loader";
-import { useLocation } from "react-router-dom";
-import { usePaginationEnd } from "./usePaginationEnd";
 
 export const ListVideoItem = () => {
   const listVideoItem = useAppSelector(selectListVideoItem);
@@ -96,7 +94,7 @@ export const ListVideoItem = () => {
     if (currentPage === 0) dispatch(toggleBackToMostPopular());
     else setCurrentPage(0);
     dispatch(setUpdate(false));
-    console.log(videoQuery);
+    console.log(videoQuery, videoList);
     console.log(searchQuery, searchList);
 
     prevItemQuantity.current = 0;
@@ -122,25 +120,6 @@ export const ListVideoItem = () => {
     currentPage,
     shouldVideoBeListed,
   });
-  // console.log(listVideoItem);
-
-  // usePaginationEnd({
-  //   isFetching: videoList.isFetching,
-  //   setHasPaginationEnded,
-  // });
-
-  // usePaginationEnd({
-  //   isFetching: searchList.isFetching,
-  //   setHasPaginationEnded,
-  // });
-
-  // console.log(hasPaginationEnded);
-
-  // useEffect(() => {
-  //   if (videoList.isFetching || searchList.isFetching)
-  //     setHasPaginationEnded(false);
-  //   else setHasPaginationEnded(true);
-  // }, [videoList.isFetching, searchList.isFetching]);
 
   useEffect(() => {
     if (searchBar.isSearching) {
@@ -156,41 +135,36 @@ export const ListVideoItem = () => {
   }, [searchBar.isSearching]);
 
   useEffect(() => {
-    // if (searchQuery) {
     console.log("???");
     setHasSettingVideoItemsEnded(false);
-
-    // setCurrentPage(0);
-    // }
   }, [searchQuery]);
 
   useEffect(() => {
-    // console.log(
-    //   "IM HERE",
-    //   listVideoItem.fetchedSnippets,
-    //   listVideoItem.wasUpdated
-    // );
+    console.log("IM HERE", listVideoItem.fetchedSnippets);
+
     setHasSettingVideoItemsEnded(false);
     if (
-      listVideoItem.wasUpdated &&
-      listVideoItem.fetchedSnippets.length > prevItemQuantity.current
+      listVideoItem.wasUpdated
+      // listVideoItem.fetchedSnippets.length > prevItemQuantity.current
     ) {
-      console.log("DO YOU COPY");
+      if (shouldButtonRender()) dispatch(toggleBackToMostPopular());
+      else {
+        console.log("DO YOU COPY");
 
-      prevItemQuantity.current = listVideoItem.fetchedSnippets.length;
-      const newVideoItemsList = listVideoItem.fetchedSnippets.map((item) => {
-        key.current++;
-        return (
-          <VideoItem
-            snippet={item.snippet}
-            videoId={item.videoId}
-            key={key.current}
-          />
-        );
-      });
-      setVideoItemsList([...newVideoItemsList]);
+        prevItemQuantity.current = listVideoItem.fetchedSnippets.length;
+        const newVideoItemsList = listVideoItem.fetchedSnippets.map((item) => {
+          key.current++;
+          return (
+            <VideoItem
+              snippet={item.snippet}
+              videoId={item.id}
+              key={key.current}
+            />
+          );
+        });
+        setVideoItemsList([...newVideoItemsList]);
+      }
     }
-    // setHasPaginationEnded(true);
     setHasSettingVideoItemsEnded(true);
   }, [listVideoItem.fetchedSnippets, currentPage]);
 

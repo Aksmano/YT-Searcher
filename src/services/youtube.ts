@@ -14,8 +14,15 @@ export const apiSlice = createApi({
       query: (queryParams) =>
         `search?key=${process.env.REACT_APP_API_KEY}${queryParams}`,
     }),
+    getVideo: builder.query<videoListResponse, string>({
+      query: (queryParams) =>
+        `videos?key=${process.env.REACT_APP_API_KEY}${queryParams}`,
+    }),
   }),
 });
 
-export const { useGetListVideosResultQuery, useGetListSearchResultQuery } =
-  apiSlice;
+export const {
+  useGetListVideosResultQuery,
+  useGetListSearchResultQuery,
+  useGetVideoQuery,
+} = apiSlice;

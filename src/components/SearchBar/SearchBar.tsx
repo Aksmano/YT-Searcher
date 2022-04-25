@@ -10,7 +10,12 @@ import {
   // setCurrentPage,
   togglePage,
 } from "../ListVideoItem/ListVideoItemSlice";
-import { selectSearchBar, setButtonState, setOn } from "./SearchBarSlice";
+import {
+  selectSearchBar,
+  setButtonState,
+  setOn,
+  toggleSearch,
+} from "./SearchBarSlice";
 
 export const SearchBar = () => {
   const searchQuery = useAppSelector(selectSearchQuery);
@@ -44,8 +49,9 @@ export const SearchBar = () => {
           console.log("CLICKED");
           dispatch(setSearchPageToken(""));
           dispatch(newSearchQueryTerm(queryTerm));
-          dispatch(togglePage());
+          dispatch(toggleSearch());
           dispatch(setOn());
+          dispatch(togglePage());
           // console.log("queryTerm", queryTerm);
           // console.log("query searchBar", searchQuery);
         }}

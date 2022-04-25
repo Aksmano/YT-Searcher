@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useAppDispatch, useAppSelector } from "../../app/hooks";
 import {
   selectVideoQuery,
@@ -36,7 +36,7 @@ export const ListVideoItem = () => {
   const [hasPaginationEnded, setHasPaginationEnded] = useState<boolean>(true);
   const [shouldVideoBeListed, setShouldVideoBeListed] = useState<boolean>(true);
 
-  let key = 0;
+  const key = useRef<number>(0);
 
   // const location = useLocation();
   // console.log(location.pathname);
@@ -54,26 +54,17 @@ export const ListVideoItem = () => {
     skip: shouldVideoBeListed === true,
   });
 
+  console.log("searchList", searchList);
+
   const handleLoadMore = () => {
     setCurrentPage((page) => (page + 1) % 5);
     setHasPaginationEnded(false);
-    // console.log(searchList.data!.nextPageToken);
-
-    // console.log(searchQuery);
-    // console.log(searchBar.isSearching);
   };
-
-  // useEffect(() => {
-  //   console.log("handleLoadMore currentPage: ", currentPage);
-
-  // }, [currentPage]);
-
-  // console.log("searchList", searchList);
 
   useEffect(() => {
     setCurrentPage(0);
     console.log("toggled");
-  }, [listVideoItem.pageToggler]);
+  }, [listVideoItem.pageToggler, searchBar.isSearching]);
 
   useSetList({
     data: videoList.data,
@@ -90,11 +81,13 @@ export const ListVideoItem = () => {
   // console.log(listVideoItem);
 
   useEffect(() => {
-    if (searchBar.isSearching) setShouldVideoBeListed(false);
-    else {
+    if (searchBar.isSearching) {
+      setShouldVideoBeListed(false);
+      dispatch(setSearchPageToken(""));
+    } else {
       // dispatch(setOff());
       setShouldVideoBeListed(true);
-      setVideoPageToken("");
+      dispatch(setVideoPageToken(""));
     }
     setCurrentPage(0);
     console.log("ShouldVideoBeListed:", shouldVideoBeListed);
@@ -104,7 +97,7 @@ export const ListVideoItem = () => {
     if (hasPaginationEnded) {
       console.log("???");
       setHasSettingVideoItemsEnded(false);
-      setCurrentPage(0);
+      // setCurrentPage(0);
     }
   }, [searchQuery]);
 
@@ -113,8 +106,8 @@ export const ListVideoItem = () => {
     setHasSettingVideoItemsEnded(false);
     if (listVideoItem.fetchedSnippets.length > 0) {
       const newVideoItemsList = listVideoItem.fetchedSnippets.map((item) => {
-        key++;
-        return <VideoItem snippet={item} key={key} />;
+        key.current++;
+        return <VideoItem snippet={item} key={key.current} />;
       });
       setVideoItemsList([...newVideoItemsList]);
       setHasSettingVideoItemsEnded(true);

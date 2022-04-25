@@ -5,6 +5,7 @@ import { useAppDispatch } from "../../app/hooks";
 import { setOff } from "../SearchBar/SearchBarSlice";
 import { SearchBar } from "../SearchBar/SearchBar";
 import { togglePage } from "../ListVideoItem/ListVideoItemSlice";
+import { setVideoPageToken } from "../../services/queryParamsBuilders/videoQuerySlice";
 
 interface NavbarProps {
   switchTheme: Function;
@@ -18,6 +19,7 @@ const Navbar = ({ switchTheme }: NavbarProps) => {
         className={styles.title}
         onClick={() => {
           dispatch(setOff());
+          dispatch(setVideoPageToken(""));
           dispatch(togglePage());
           console.log("CLICKED LOGO");
         }}

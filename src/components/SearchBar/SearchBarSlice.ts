@@ -3,16 +3,21 @@ import { RootState } from "../../app/store";
 
 export interface searchBarState {
   isSearching: boolean;
+  searchToggler: boolean;
 }
 
 const initialState: searchBarState = {
   isSearching: false,
+  searchToggler: false,
 };
 
 export const searchBarSlice = createSlice({
   name: "searchBar",
   initialState,
   reducers: {
+    toggleSearch: (state) => {
+      state.searchToggler = !state.searchToggler;
+    },
     setOn: (state) => {
       state.isSearching = true;
     },
@@ -27,6 +32,7 @@ export const searchBarSlice = createSlice({
 
 export const selectSearchBar = (state: RootState) => state.searchBar;
 
-export const { setOn, setOff, setButtonState } = searchBarSlice.actions;
+export const { setOn, setOff, setButtonState, toggleSearch } =
+  searchBarSlice.actions;
 
 export default searchBarSlice.reducer;

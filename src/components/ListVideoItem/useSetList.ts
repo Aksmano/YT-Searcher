@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 import { useAppDispatch, useAppSelector } from "../../app/hooks";
 import { setSearchPageToken } from "../../services/queryParamsBuilders/searchQuerySlice";
 import { setVideoPageToken } from "../../services/queryParamsBuilders/videoQuerySlice";
@@ -8,6 +8,7 @@ import { selectSearchBar } from "../SearchBar/SearchBarSlice";
 import {
   selectListVideoItem,
   setNewFetchedSnippets,
+  togglePage,
   // setCurrentPage,
 } from "./ListVideoItemSlice";
 
@@ -25,13 +26,16 @@ export const useSetList = ({
   shouldVideoBeListed,
 }: useSetListProps) => {
   const dispatch = useAppDispatch();
+  const searchBar = useAppSelector(selectSearchBar);
   const listVideoItem = useAppSelector(selectListVideoItem);
+  // const isPageTokenSet = useRef<boolean>(false);
 
   useEffect(() => {
     if (data !== undefined && !isUninitialized) {
       console.log("FROM useSetList", data.kind);
-
+      let isPageTokenSet = false;
       let newFetchedVideos: snippet[] = [];
+
       for (let i = 0; i < 10; i++) {
         if (
           listVideoItem.fetchedSnippets.length + i ===
@@ -47,12 +51,20 @@ export const useSetList = ({
       console.log("prevPageToken", data!.prevPageToken);
 
       if (currentPage === 4) {
+        isPageTokenSet = true;
+        console.log(shouldVideoBeListed);
+        console.log("dispatch new token");
+
         if (shouldVideoBeListed)
           dispatch(setVideoPageToken(data!.nextPageToken));
         else dispatch(setSearchPageToken(data!.nextPageToken));
       }
 
-      if (data!.prevPageToken === undefined && currentPage === 0) {
+      if (
+        !isPageTokenSet &&
+        data!.prevPageToken === undefined &&
+        currentPage === 0
+      ) {
         console.log("new fetched videos");
         dispatch(setNewFetchedSnippets([...newFetchedVideos]));
       } else {

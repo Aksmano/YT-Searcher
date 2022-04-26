@@ -36,8 +36,8 @@ const App = () => {
     <div className="App" data-theme={theme}>
       <Navbar switchTheme={switchTheme} />
       <Routes>
-        <Route path="/" element={<ListVideoItem />}></Route>
-        <Route path="/test" element={<ListMostPopular />} />
+        <Route path="/" element={<ListMostPopular />}></Route>
+        <Route path="/search/" element={<div>TEST</div>} />
         <Route path="/video/:id" element={<VideoDetails />} />
       </Routes>
     </div>

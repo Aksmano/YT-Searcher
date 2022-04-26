@@ -5,7 +5,9 @@ import { useAppDispatch } from "../../app/hooks";
 import { setOff } from "../SearchBar/SearchBarSlice";
 import { SearchBar } from "../SearchBar/SearchBar";
 import { setUpdate, togglePage } from "../ListVideoItem/ListVideoItemSlice";
-import { setVideoPageToken } from "../../services/queryParamsBuilders/videoQuerySlice";
+import { setVideoPageToken, videoQueryState } from "../../services/queryParamsBuilders/videoQuerySlice";
+import { selectListMostPopular, setCurrentPage, setFechtedInfo, setPrevKind, setVideoQuery, toggleLoad } from "../ListMostPopular/ListMostPopularSlice";
+import { useSelector } from "react-redux";
 
 interface NavbarProps {
   switchTheme: Function;
@@ -15,15 +17,28 @@ const Navbar = ({ switchTheme }: NavbarProps) => {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
 
+  const initialMostPopular: videoQueryState = {
+    part: ["snippet", "contentDetails", "statistics"],
+    chart: "mostPopular",
+    pageToken: "",
+    id: [],
+    maxResults: "50",
+  }
+
   return (
     <nav className={styles.navbar}>
       <div
         className={styles.title}
         onClick={() => {
-          dispatch(setOff());
-          dispatch(setVideoPageToken(""));
-          dispatch(togglePage());
+          // dispatch(setOff());
+          // dispatch(setVideoPageToken(""));
+          // dispatch(togglePage());
           // dispatch(setUpdate(false));
+          // dispatch(setFechtedInfo([]))
+          dispatch(setPrevKind(""))
+          dispatch(setVideoQuery(initialMostPopular))
+          dispatch(setCurrentPage(0))
+          dispatch(toggleLoad())
           navigate("/");
           console.log("CLICKED LOGO");
         }}

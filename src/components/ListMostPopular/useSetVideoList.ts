@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 import { useSelector } from "react-redux";
 import { useAppDispatch } from "../../app/hooks";
 import { snippet, videoListResponse } from "../../services/types";
@@ -6,6 +6,7 @@ import { extendedSnippet } from "../ListVideoItem/ListVideoItemSlice";
 import {
   selectListMostPopular,
   setFechtedInfo,
+  setPrevKind,
   setVideoQuery,
 } from "./ListMostPopularSlice";
 
@@ -26,12 +27,18 @@ export const useSetVideoList = ({
 
   const isEndOfItems = (i: number, data: videoListResponse): boolean => {
     return (
-      listMostPopular.fetchedInfo.length + i === data.pageInfo.totalResults
+      listMostPopular.fetchedInfo.length + i === data.pageInfo.totalResults && data.prevPageToken !== undefined
     );
   };
 
+  if(data !== undefined && data?.kind !== listMostPopular.prevKind) {
+    console.log("Changed datatype");
+    dispatch(setPrevKind(data?.kind))
+  }
+
   useEffect(() => {
-    if (data !== undefined && !isFetching && !isLoading) {
+  console.log("FROM useEffect", data?.kind);
+  if (data !== undefined && !isFetching && !isLoading) {
       let isPageTokenSet = false;
       let newFetchedVideos: extendedSnippet[] = [];
       let snippetData: snippet;
@@ -72,5 +79,5 @@ export const useSetVideoList = ({
         );
       }
     }
-  }, [listMostPopular.currentPage, data?.kind]);
+  }, [listMostPopular.currentPage, listMostPopular.prevKind, listMostPopular.toggler]);
 };

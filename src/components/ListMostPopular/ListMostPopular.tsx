@@ -37,6 +37,8 @@ export const ListMostPopular = () => {
     queryBuilder(listMostPopular.videoQuery)
   );
 
+  console.log(videoList)
+
   useSetVideoList({
     data: videoList.data!,
     isFetching: videoList.isFetching,

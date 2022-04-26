@@ -6,6 +6,7 @@ import {
   newSearchQueryTerm,
   setSearchPageToken,
 } from "../../services/queryParamsBuilders/searchQuerySlice";
+import { setCurrentPage } from "../ListMostPopular/ListMostPopularSlice";
 import {
   selectListVideoItem,
   // setCurrentPage,
@@ -50,12 +51,13 @@ export const SearchBar = () => {
       <button
         onClick={(e) => {
           console.log("CLICKED");
-          dispatch(setSearchPageToken(""));
-          dispatch(newSearchQueryTerm(queryTerm));
-          dispatch(toggleSearch());
-          dispatch(setOn());
-          dispatch(togglePage());
-          navigate("/");
+          // dispatch(setSearchPageToken(""));
+          // dispatch(newSearchQueryTerm(queryTerm));
+          // dispatch(toggleSearch());
+          // dispatch(setOn());
+          // dispatch(togglePage());
+          dispatch(setCurrentPage(0))
+          navigate("/search");
           // console.log("queryTerm", queryTerm);
           // console.log("query searchBar", searchQuery);
         }}

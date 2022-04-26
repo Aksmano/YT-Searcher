@@ -8,12 +8,16 @@ import { videoQueryState } from "../../services/queryParamsBuilders/videoQuerySl
 export interface ListMostPopularState {
   fetchedInfo: extendedSnippet[];
   currentPage: number;
+  prevKind: string;
+  toggler: boolean,
   videoQuery: videoQueryState;
 }
 
 const initialState: ListMostPopularState = {
   fetchedInfo: [],
   currentPage: 0,
+  prevKind: "",
+  toggler: false,
   videoQuery: {
     part: ["snippet", "contentDetails", "statistics"],
     chart: "mostPopular",
@@ -38,13 +42,19 @@ export const ListMostPopularSlice = createSlice({
     setVideoQuery: (state, action: PayloadAction<videoQueryState>) => {
       state.videoQuery = { ...action.payload };
     },
+    setPrevKind: (state, action: PayloadAction<string>) => {
+      state.prevKind = action.payload
+    },
+    toggleLoad: (state) => {
+      state.toggler = !state.toggler
+    }
   },
 });
 
 export const selectListMostPopular = (state: RootState) =>
   state.ListMostPopular;
 
-export const { setFechtedInfo, setCurrentPage, setVideoQuery } =
+export const { setFechtedInfo, setCurrentPage, setVideoQuery, setPrevKind, toggleLoad } =
   ListMostPopularSlice.actions;
 
 export default ListMostPopularSlice.reducer;

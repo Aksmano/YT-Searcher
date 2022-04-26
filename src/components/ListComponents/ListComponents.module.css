@@ -1,0 +1,25 @@
+.itemListContainer {
+  margin: 0rem 0 0 0;
+  transition: margin 0.25s;
+}
+
+.itemList {
+  min-height: calc(100vh - 7rem);
+  padding: 1.5rem;
+  margin: 0 auto;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-content: center;
+}
+
+.buttonContainer {
+  display: flex;
+  width: 100%;
+  justify-content: center;
+}
+
+.loadMore {
+  padding: 1rem 1.5rem;
+  margin: 2rem;
+}

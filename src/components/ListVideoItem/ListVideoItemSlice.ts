@@ -2,18 +2,13 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { useAppDispatch } from "../../app/hooks";
 import { VideoItem } from "../VideoItem/VideoItem";
 import { RootState } from "../../app/store";
-import { snippet } from "../../services/types";
+import { extendedSnippet, snippet } from "../../services/types";
 
 export interface ListVideoItemState {
   fetchedSnippets: extendedSnippet[];
   pageToggler: boolean;
   toMostPopularToggler: boolean;
   wasUpdated: boolean;
-}
-
-export interface extendedSnippet {
-  snippet: snippet;
-  id: string;
 }
 
 const initialState: ListVideoItemState = {

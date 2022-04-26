@@ -1,25 +1,6 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { RootState } from "../../app/store";
-
-export interface videoQueryState {
-  // required
-  part: string[];
-
-  // filters (must be at least one active)
-  chart: string; // acceptable states: mostPopular
-  id: string[];
-  myRating?: string; // OAuth only
-
-  // optional
-  h1?: string;
-  maxHeight?: string;
-  maxWidth?: string;
-  onBehalfOfContentOwner?: string; // OAuth
-  maxResults?: string; // 0-50 range
-  pageToken?: string;
-  regionCode?: string;
-  videoCategoryId?: string;
-}
+import { videoQueryState } from "../types";
 
 const initialState: videoQueryState = {
   part: ["snippet", "contentDetails", "statistics"],

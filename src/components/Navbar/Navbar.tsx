@@ -2,12 +2,14 @@ import styles from "./Navbar.module.css";
 import { Link, useNavigate } from "react-router-dom";
 import logo from "../../img/yt.png";
 import { useAppDispatch } from "../../app/hooks";
-import { setOff } from "../SearchBar/SearchBarSlice";
 import { SearchBar } from "../SearchBar/SearchBar";
-import { setUpdate, togglePage } from "../ListVideoItem/ListVideoItemSlice";
-import { setVideoPageToken, videoQueryState } from "../../services/queryParamsBuilders/videoQuerySlice";
-import { selectListMostPopular, setCurrentPage, setFechtedInfo, setPrevKind, setVideoQuery, toggleLoad } from "../ListMostPopular/ListMostPopularSlice";
-import { useSelector } from "react-redux";
+import {
+  setMOCurrentPage,
+  setPrevKind,
+  setVideoQuery,
+  toggleLoad,
+} from "../ListMostPopular/ListMostPopularSlice";
+import { videoQueryState } from "../../services/types";
 
 interface NavbarProps {
   switchTheme: Function;
@@ -23,7 +25,7 @@ const Navbar = ({ switchTheme }: NavbarProps) => {
     pageToken: "",
     id: [],
     maxResults: "50",
-  }
+  };
 
   return (
     <nav className={styles.navbar}>
@@ -35,10 +37,10 @@ const Navbar = ({ switchTheme }: NavbarProps) => {
           // dispatch(togglePage());
           // dispatch(setUpdate(false));
           // dispatch(setFechtedInfo([]))
-          dispatch(setPrevKind(""))
-          dispatch(setVideoQuery(initialMostPopular))
-          dispatch(setCurrentPage(0))
-          dispatch(toggleLoad())
+          dispatch(setPrevKind(""));
+          dispatch(setVideoQuery(initialMostPopular));
+          dispatch(setMOCurrentPage(0));
+          dispatch(toggleLoad());
           navigate("/");
           console.log("CLICKED LOGO");
         }}

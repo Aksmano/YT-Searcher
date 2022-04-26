@@ -2,11 +2,15 @@ import { useEffect, useRef } from "react";
 import { useAppDispatch, useAppSelector } from "../../app/hooks";
 import { setSearchPageToken } from "../../services/queryParamsBuilders/searchQuerySlice";
 import { setVideoPageToken } from "../../services/queryParamsBuilders/videoQuerySlice";
-import { searchResult, video, snippet } from "../../services/types";
+import {
+  searchResult,
+  video,
+  snippet,
+  extendedSnippet,
+} from "../../services/types";
 import { searchListResponse, videoListResponse } from "../../services/types";
 import { selectSearchBar } from "../SearchBar/SearchBarSlice";
 import {
-  extendedSnippet,
   selectListVideoItem,
   setNewFetchedSnippets,
   setUpdate,

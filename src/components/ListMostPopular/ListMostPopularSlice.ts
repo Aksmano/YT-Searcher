@@ -1,15 +1,12 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { useAppDispatch } from "../../app/hooks";
-import { VideoItem } from "../VideoItem/VideoItem";
 import { RootState } from "../../app/store";
-import { extendedSnippet } from "../ListVideoItem/ListVideoItemSlice";
-import { videoQueryState } from "../../services/queryParamsBuilders/videoQuerySlice";
+import {
+  extendedSnippet,
+  ListComponent,
+  videoQueryState,
+} from "../../services/types";
 
-export interface ListMostPopularState {
-  fetchedInfo: extendedSnippet[];
-  currentPage: number;
-  prevKind: string;
-  toggler: boolean,
+export interface ListMostPopularState extends ListComponent {
   videoQuery: videoQueryState;
 }
 
@@ -36,25 +33,30 @@ export const ListMostPopularSlice = createSlice({
       });
       state.fetchedInfo = [...newfetchedInfo];
     },
-    setCurrentPage: (state, action: PayloadAction<number>) => {
+    setMOCurrentPage: (state, action: PayloadAction<number>) => {
       state.currentPage = action.payload;
     },
     setVideoQuery: (state, action: PayloadAction<videoQueryState>) => {
       state.videoQuery = { ...action.payload };
     },
     setPrevKind: (state, action: PayloadAction<string>) => {
-      state.prevKind = action.payload
+      state.prevKind = action.payload;
     },
     toggleLoad: (state) => {
-      state.toggler = !state.toggler
-    }
+      state.toggler = !state.toggler;
+    },
   },
 });
 
 export const selectListMostPopular = (state: RootState) =>
   state.ListMostPopular;
 
-export const { setFechtedInfo, setCurrentPage, setVideoQuery, setPrevKind, toggleLoad } =
-  ListMostPopularSlice.actions;
+export const {
+  setFechtedInfo,
+  setMOCurrentPage,
+  setVideoQuery,
+  setPrevKind,
+  toggleLoad,
+} = ListMostPopularSlice.actions;
 
 export default ListMostPopularSlice.reducer;

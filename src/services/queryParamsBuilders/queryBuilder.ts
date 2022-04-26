@@ -1,6 +1,5 @@
+import { searchQueryState, videoQueryState } from "../types";
 import createQueryParams from "./createQueryParams";
-import { searchQueryState } from "./searchQuerySlice";
-import { videoQueryState } from "./videoQuerySlice";
 
 const queryBuilder = (
   queryParams: videoQueryState | searchQueryState

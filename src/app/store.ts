@@ -2,18 +2,20 @@ import { configureStore, ThunkAction, Action } from "@reduxjs/toolkit";
 import { apiSlice } from "../services/youtube";
 import videoQueryReducer from "../services/queryParamsBuilders/videoQuerySlice";
 import searchQueryReducer from "../services/queryParamsBuilders/searchQuerySlice";
-import searchBarSlice from "../components/SearchBar/SearchBarSlice";
-import ListVideoItemSlice from "../components/ListVideoItem/ListVideoItemSlice";
+import searchBarReducer from "../components/SearchBar/SearchBarSlice";
+import ListVideoItemReducer from "../components/ListVideoItem/ListVideoItemSlice";
 import ListMostPopularReducer from "../components/ListMostPopular/ListMostPopularSlice";
+import ListSearchResultReducer from "../components/ListSearchResult/ListSearchResultSlice";
 
 export const store = configureStore({
   reducer: {
     [apiSlice.reducerPath]: apiSlice.reducer,
     videoQuery: videoQueryReducer,
     searchQuery: searchQueryReducer,
-    searchBar: searchBarSlice,
-    ListVideoItem: ListVideoItemSlice,
+    searchBar: searchBarReducer,
+    ListVideoItem: ListVideoItemReducer,
     ListMostPopular: ListMostPopularReducer,
+    ListSearchResult: ListSearchResultReducer,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware().concat(apiSlice.middleware),

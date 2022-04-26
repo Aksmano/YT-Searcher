@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { useAppSelector, useAppDispatch } from "../../app/hooks";
 import {
   selectSearchQuery,
@@ -22,6 +23,8 @@ export const SearchBar = () => {
   const searchBar = useAppSelector(selectSearchBar);
   const dispatch = useAppDispatch();
   const [queryTerm, setQueryTerm] = useState<string>("");
+
+  const navigate = useNavigate();
 
   // console.log("query outside searchBar", searchQuery);
 
@@ -52,6 +55,7 @@ export const SearchBar = () => {
           dispatch(toggleSearch());
           dispatch(setOn());
           dispatch(togglePage());
+          navigate("/");
           // console.log("queryTerm", queryTerm);
           // console.log("query searchBar", searchQuery);
         }}

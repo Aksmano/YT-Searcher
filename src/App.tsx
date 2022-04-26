@@ -8,6 +8,7 @@ import { ListVideoItem } from "./components/ListVideoItem/ListVideoItem";
 import Navbar from "./components/Navbar/Navbar";
 import { Routes, Route } from "react-router-dom";
 import { VideoDetails } from "./components/VideoDetails/VideoDetails";
+import { ListMostPopular } from "./components/ListMostPopular/ListMostPopular";
 
 const App = () => {
   const defaultDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
@@ -36,6 +37,7 @@ const App = () => {
       <Navbar switchTheme={switchTheme} />
       <Routes>
         <Route path="/" element={<ListVideoItem />}></Route>
+        <Route path="/test" element={<ListMostPopular />} />
         <Route path="/video/:id" element={<VideoDetails />} />
       </Routes>
     </div>

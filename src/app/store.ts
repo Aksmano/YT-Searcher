@@ -4,6 +4,7 @@ import videoQueryReducer from "../services/queryParamsBuilders/videoQuerySlice";
 import searchQueryReducer from "../services/queryParamsBuilders/searchQuerySlice";
 import searchBarSlice from "../components/SearchBar/SearchBarSlice";
 import ListVideoItemSlice from "../components/ListVideoItem/ListVideoItemSlice";
+import ListMostPopularReducer from "../components/ListMostPopular/ListMostPopularSlice";
 
 export const store = configureStore({
   reducer: {
@@ -12,6 +13,7 @@ export const store = configureStore({
     searchQuery: searchQueryReducer,
     searchBar: searchBarSlice,
     ListVideoItem: ListVideoItemSlice,
+    ListMostPopular: ListMostPopularReducer,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware().concat(apiSlice.middleware),

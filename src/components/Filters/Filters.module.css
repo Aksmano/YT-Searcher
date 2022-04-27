@@ -27,7 +27,7 @@
 }
 
 .filters .input {
-  min-width: 10rem;
+  min-width: 6rem;
   border: 0.125rem solid var(--border-color);
   font-size: 1rem;
   color: var(--text-primary);

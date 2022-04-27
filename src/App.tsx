@@ -11,6 +11,7 @@ import { VideoDetails } from "./components/VideoDetails/VideoDetails";
 import { ListMostPopular } from "./components/ListMostPopular/ListMostPopular";
 import { ListSearchResult } from "./components/ListSearchResult/ListSearchResult";
 import { FiltersBar } from "./components/FiltersBar/FiltersBar";
+import { SearchBar } from "./components/SearchBar/SearchBar";
 
 const App = () => {
   const defaultDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
@@ -36,8 +37,9 @@ const App = () => {
 
   return (
     <div className="App" data-theme={theme}>
-      <FiltersBar />
+      {/* <FiltersBar /> */}
       <Navbar switchTheme={switchTheme} />
+      <SearchBar />
       <Routes>
         <Route path="/" element={<ListMostPopular />}></Route>
         <Route path="/search/" element={<ListSearchResult />} />

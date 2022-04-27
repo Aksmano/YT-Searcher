@@ -1,11 +1,11 @@
 .itemListContainer {
-  margin: 5rem 0 0 0;
+  margin: 0rem 0 0 0;
   transition: 0.25s;
 }
 
 .itemList {
   min-height: calc(100vh - 7rem);
-  padding: 1.5rem;
+  padding: 0 1.5rem;
   margin: 0 auto;
   display: flex;
   flex-wrap: wrap;

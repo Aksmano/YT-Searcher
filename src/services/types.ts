@@ -37,7 +37,7 @@ export interface searchQueryState {
   locationRadius?: string; // acceptable units - m, km, ft, mi, e.g. 10km
   maxResults?: string; // 0-50 range
   onBehalfOfContentOwner?: string; // OAuth
-  order?: string;
+  order?: string; // acceptable values - date, rating, relevance, title, videoCount, viewCount
   pageToken?: string;
   publishedAfter?: string; // RFC 3339 date-time format(YYYY-MM-DDTHH:MM:SSZ)
   publishedBefore?: string;

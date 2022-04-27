@@ -8,17 +8,17 @@ import {
   setSRCurrentPage,
   toggleLoad,
 } from "../ListSearchResult/ListSearchResultSlice";
-import { selectSearchBar, setOn } from "./SearchBarSlice";
+import { selectSearchBar, setNewSearchQuery, setOn } from "./SearchBarSlice";
 import styles from "./SearchBar.module.css";
 
 export const SearchBar = () => {
   const dispatch = useAppDispatch();
   const searchBar = useAppSelector(selectSearchBar);
-  const [newSearchQuery, setNewSearchQuery] = useState<searchQueryState>({
-    part: ["snippet"],
-    q: "",
-    maxResults: "50",
-  });
+  // const [newSearchQuery, setNewSearchQuery] = useState<searchQueryState>({
+  //   part: ["snippet"],
+  //   q: "",
+  //   maxResults: "50",
+  // });
 
   const navigate = useNavigate();
 
@@ -35,15 +35,22 @@ export const SearchBar = () => {
   return (
     <div className={styles.filterContainer}>
       <input
+        className={styles.termInput}
         type="text"
         name="queryTerm"
         id="queryTerm"
-        value={newSearchQuery.q}
+        value={searchBar.newSearchQuery.q}
         onChange={(e) => {
-          setNewSearchQuery({ ...newSearchQuery, q: e.target.value });
+          dispatch(
+            setNewSearchQuery({
+              ...searchBar.newSearchQuery,
+              q: e.target.value,
+            })
+          );
         }}
       />
       <button
+        // className={styles.searchButton}
         onClick={(e) => {
           console.log("CLICKED");
           // dispatch(setSearchPageToken(""));
@@ -53,7 +60,14 @@ export const SearchBar = () => {
           // dispatch(togglePage());
           dispatch(setOn());
           dispatch(setPrevKind(""));
-          dispatch(setSearchQuery(newSearchQuery));
+          dispatch(setSearchQuery(searchBar.newSearchQuery));
+          // dispatch(
+          //   setNewSearchQuery({
+          //     part: ["snippet"],
+          //     q: searchBar.newSearchQuery.q,
+          //     maxResults: "50",
+          //   })
+          // );
           dispatch(setSRCurrentPage(0));
           dispatch(toggleLoad());
           navigate("/search");
@@ -63,8 +77,6 @@ export const SearchBar = () => {
       >
         Search
       </button>
-
-      <button onClick={(e) => {}}>Show filters</button>
     </div>
   );
 };

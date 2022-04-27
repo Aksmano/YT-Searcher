@@ -4,7 +4,6 @@ import "./App.css";
 import { selectSearchQuery } from "./services/queryParamsBuilders/searchQuerySlice";
 import { useGetListVideosResultQuery } from "./services/youtube";
 import useLocalStorage from "use-local-storage";
-import { ListVideoItem } from "./components/ListVideoItem/ListVideoItem";
 import Navbar from "./components/Navbar/Navbar";
 import { Routes, Route } from "react-router-dom";
 import { VideoDetails } from "./components/VideoDetails/VideoDetails";

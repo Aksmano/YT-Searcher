@@ -1,24 +1,3 @@
-// import { useEffect, useState } from "react";
-// import { useNavigate } from "react-router-dom";
-// import { useAppSelector, useAppDispatch } from "../../app/hooks";
-// import {
-//   selectSearchQuery,
-//   newSearchQueryTerm,
-//   setSearchPageToken,
-// } from "../../services/queryParamsBuilders/searchQuerySlice";
-// import { setCurrentPage } from "../ListMostPopular/ListMostPopularSlice";
-// import {
-//   selectListVideoItem,
-//   // setCurrentPage,
-//   togglePage,
-// } from "../ListVideoItem/ListVideoItemSlice";
-// import {
-//   selectSearchBar,
-//   setButtonState,
-//   setOn,
-//   toggleSearch,
-// } from "./SearchBarSlice";
-
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "../../app/hooks";
@@ -30,11 +9,7 @@ import {
   toggleLoad,
 } from "../ListSearchResult/ListSearchResultSlice";
 import { selectSearchBar, setOn } from "./SearchBarSlice";
-// import {
-//   setCurrentPage,
-//   setPrevKind,
-//   setSearchQuery,
-// } from "../ListSearchResult/ListSearchResultSlice";
+import styles from "./SearchBar.module.css";
 
 export const SearchBar = () => {
   const dispatch = useAppDispatch();
@@ -58,7 +33,7 @@ export const SearchBar = () => {
   // }, [searchBar]);
 
   return (
-    <div>
+    <div className={styles.filterContainer}>
       <input
         type="text"
         name="queryTerm"
@@ -88,6 +63,8 @@ export const SearchBar = () => {
       >
         Search
       </button>
+
+      <button onClick={(e) => {}}>Show filters</button>
     </div>
   );
 };

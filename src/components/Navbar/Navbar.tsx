@@ -50,8 +50,7 @@ const Navbar = ({ switchTheme }: NavbarProps) => {
         <div className={styles.divTitle}>YT Searcher</div>
         {/* </Link> */}
       </div>
-      <SearchBar />
-
+      {/* <SearchBar /> */}
       <button
         className={styles.themeButton}
         onClick={() => {

@@ -40,7 +40,7 @@ button {
   background-color: var(--button-color);
   border: 0.125rem var(--text-primary) solid;
   transition: all 0.15s;
-  width: 10rem;
+  /* width: 10rem; */
   font-size: 1rem;
   font-weight: bold;
 }

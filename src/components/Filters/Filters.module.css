@@ -1,0 +1,41 @@
+.navFilters {
+  display: flex;
+  flex-wrap: wrap;
+  /* width: 72vw; */
+  border-radius: 0rem 0 1.5rem 1.5rem;
+  justify-content: center;
+  align-items: center;
+  background-color: var(--navbar-bkg-clr);
+  min-height: 3rem;
+  padding: 1rem;
+  /* margin-top: 5rem; */
+  transition: margin 0.25s;
+}
+
+.hide {
+  margin-top: 5rem;
+}
+
+.filters {
+  display: flex;
+  justify-content: left;
+  align-items: center;
+}
+
+.filtersItem {
+  padding: 0 1rem;
+}
+
+.filters .input {
+  min-width: 10rem;
+  border: 0.125rem solid var(--border-color);
+  font-size: 1rem;
+  color: var(--text-primary);
+  border-radius: 5px;
+  background-color: var(--background);
+  margin: 0 2rem 0 1rem;
+}
+
+.filters label {
+  margin-left: 1rem;
+}

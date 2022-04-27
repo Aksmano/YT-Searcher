@@ -10,6 +10,7 @@ import { Routes, Route } from "react-router-dom";
 import { VideoDetails } from "./components/VideoDetails/VideoDetails";
 import { ListMostPopular } from "./components/ListMostPopular/ListMostPopular";
 import { ListSearchResult } from "./components/ListSearchResult/ListSearchResult";
+import { FiltersBar } from "./components/FiltersBar/FiltersBar";
 
 const App = () => {
   const defaultDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
@@ -35,6 +36,7 @@ const App = () => {
 
   return (
     <div className="App" data-theme={theme}>
+      <FiltersBar />
       <Navbar switchTheme={switchTheme} />
       <Routes>
         <Route path="/" element={<ListMostPopular />}></Route>

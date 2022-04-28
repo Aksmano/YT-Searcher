@@ -1,44 +1,27 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app), using the [Redux](https://redux.js.org/) and [Redux Toolkit](https://redux-toolkit.js.org/) template.
+# YT Searcher
 
-## Available Scripts
+Simple web application written in TypeScript using React + Redux, which lets for searching and watching YouTube videos using Google YouTube Api
 
-In the project directory, you can run:
+This application uses _[Google YouTube Api](https://developers.google.com/youtube/v3)_ for fetching data from YouTube.
 
-### `npm start`
+## Launching client
 
-Runs the app in the development mode.<br />
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+> **Important:** After cloning this repo you have to create .env where you will store your Google API Key. The file should be add in the main app folder. After that add a following line:
+> `REACT_APP_API_KEY=[YOUR_API_KEY]`
 
-The page will reload if you make edits.<br />
-You will also see any lint errors in the console.
+- **npm start** - Runs the app in the development mode.<br>Open on [http://localhost:3000]
+- **npm build** - Builds the app for production to the `build` folder.<br />It correctly bundles React in production mode and optimizes the build for the best performance.
 
-### `npm test`
+## App UI
 
-Launches the test runner in the interactive watch mode.<br />
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+### Main screen (most trending)
 
-### `npm run build`
+![most popular](https://github.com/Aksmano/YT-Searcher/blob/main/src/img/most_popular.png)
 
-Builds the app for production to the `build` folder.<br />
-It correctly bundles React in production mode and optimizes the build for the best performance.
+It shows the most trending videos from YouTube. You can switch themes (right top cornern) and search videos by phrase (more advanced filters in future). After clicking the thumbnail you are redirected to the detailed video page.
 
-The build is minified and the filenames include the hashes.<br />
-Your app is ready to be deployed!
+### Video details
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+![video details](https://github.com/Aksmano/YT-Searcher/blob/main/src/img/video_details.png)
 
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
+On this page we can watch video and see basic info about it (title, channel, views, etc.). We can also go back to the most trending videos (by clicking top left image) or search new videos.

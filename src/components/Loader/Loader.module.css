@@ -3,7 +3,7 @@
   display: block;
   width: 8rem;
   height: 8rem;
-  /* margin: 5rem 0; */
+  margin: 2rem 0;
   border-radius: 50%;
   border: 0.5rem solid var(--border-color);
   border-color: var(--border-color) transparent var(--border-color) transparent;

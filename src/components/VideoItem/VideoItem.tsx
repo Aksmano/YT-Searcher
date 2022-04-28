@@ -1,4 +1,4 @@
-import { snippet, video } from "../../services/types";
+import { snippet } from "../../services/types";
 import { Link } from "react-router-dom";
 import styles from "./VideoItem.module.css";
 import { decode } from "html-entities";

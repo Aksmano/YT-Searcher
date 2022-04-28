@@ -14,6 +14,7 @@ const initialState: searchBarState = {
   newSearchQuery: {
     part: ["snippet"],
     q: "",
+    type: ["video"],
     maxResults: "50",
   },
 };

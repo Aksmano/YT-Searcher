@@ -12,15 +12,11 @@ export const ListMostPopular = () => {
     queryBuilder(listMostPopular.videoQuery)
   );
 
-  console.log(videoList);
-
   useSetMostPopular({
     data: videoList.data!,
     isFetching: videoList.isFetching,
     isLoading: videoList.isLoading,
   });
-
-  console.log(listMostPopular.fetchedInfo);
 
   return (
     <ListComponents

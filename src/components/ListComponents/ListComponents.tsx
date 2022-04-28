@@ -5,11 +5,8 @@ import { setMOCurrentPage } from "../ListMostPopular/ListMostPopularSlice";
 import { VideoItem } from "../VideoItem/VideoItem";
 import Loader from "../Loader/Loader";
 import styles from "./ListComponents.module.css";
-import {
-  setSearchOff,
-  setSRCurrentPage,
-} from "../ListSearchResult/ListSearchResultSlice";
-import { selectSearchBar, setOff } from "../SearchBar/SearchBarSlice";
+import { setSRCurrentPage } from "../ListSearchResult/ListSearchResultSlice";
+import { selectSearchBar } from "../SearchBar/SearchBarSlice";
 
 interface ListComponentsProps {
   itemList: ListComponent;
@@ -48,7 +45,6 @@ export const ListComponents = ({
   };
 
   const handleLoadMore = () => {
-    console.log("CLICKED LOAD MORE");
     if (type === "most popular")
       dispatch(setMOCurrentPage((itemList.currentPage + 1) % 5));
     else if (type === "search result")
@@ -56,8 +52,6 @@ export const ListComponents = ({
   };
 
   useEffect(() => {
-    console.log("Hello there");
-
     const newVideoComponentList = itemList.fetchedInfo.map((item) => {
       key.current++;
       return (

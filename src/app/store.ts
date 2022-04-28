@@ -3,7 +3,6 @@ import { apiSlice } from "../services/youtube";
 import videoQueryReducer from "../services/queryParamsBuilders/videoQuerySlice";
 import searchQueryReducer from "../services/queryParamsBuilders/searchQuerySlice";
 import searchBarReducer from "../components/SearchBar/SearchBarSlice";
-import ListVideoItemReducer from "../components/ListVideoItem/ListVideoItemSlice";
 import ListMostPopularReducer from "../components/ListMostPopular/ListMostPopularSlice";
 import ListSearchResultReducer from "../components/ListSearchResult/ListSearchResultSlice";
 
@@ -13,7 +12,6 @@ export const store = configureStore({
     videoQuery: videoQueryReducer,
     searchQuery: searchQueryReducer,
     searchBar: searchBarReducer,
-    ListVideoItem: ListVideoItemReducer,
     ListMostPopular: ListMostPopularReducer,
     ListSearchResult: ListSearchResultReducer,
   },

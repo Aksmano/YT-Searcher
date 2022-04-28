@@ -1,4 +1,4 @@
-import { useEffect, useRef } from "react";
+import { useEffect } from "react";
 import { useSelector } from "react-redux";
 import { useAppDispatch } from "../../app/hooks";
 import {
@@ -24,7 +24,6 @@ export const useSetMostPopular = ({
   isFetching,
   isLoading,
 }: useSetVideoListProps) => {
-  console.log("FROM useSetVideoList", data?.kind);
   const listMostPopular = useSelector(selectListMostPopular);
   const dispatch = useAppDispatch();
 
@@ -36,13 +35,10 @@ export const useSetMostPopular = ({
   };
 
   if (data !== undefined && data?.kind !== listMostPopular.prevKind) {
-    console.log("Changed datatype");
     dispatch(setPrevKind(data?.kind));
   }
 
   useEffect(() => {
-    console.log("FROM useEffect", data?.kind);
-
     if (data !== undefined && !isFetching && !isLoading) {
       let isPageTokenSet = false;
       let newFetchedVideos: extendedSnippet[] = [];
@@ -75,11 +71,8 @@ export const useSetMostPopular = ({
         data!.prevPageToken === undefined &&
         listMostPopular.currentPage === 0
       ) {
-        console.log("new fetched videos", newFetchedVideos);
         dispatch(setFechtedInfo([...newFetchedVideos]));
       } else {
-        console.log("adding videos");
-
         dispatch(
           setFechtedInfo([...listMostPopular.fetchedInfo, ...newFetchedVideos])
         );

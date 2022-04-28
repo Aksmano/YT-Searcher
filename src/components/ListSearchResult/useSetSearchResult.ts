@@ -24,10 +24,10 @@ export const useSetSearchResult = ({
   isFetching,
   isLoading,
 }: useSetVideoListProps) => {
-  console.log("FROM useSetSearchResult", data?.kind);
   const listSearchResult = useSelector(selectListSearchResult);
   const dispatch = useAppDispatch();
   const isPageTokenSet = useRef<boolean>(false);
+
   const isEndOfItems = (i: number, data: searchListResponse): boolean => {
     return (
       listSearchResult.fetchedInfo.length + i === data.pageInfo.totalResults &&
@@ -36,11 +36,8 @@ export const useSetSearchResult = ({
   };
 
   if (data !== undefined && data?.kind !== listSearchResult.prevKind) {
-    console.log("Changed datatype");
     dispatch(setPrevQ(data?.kind));
   }
-
-  console.log("use Ref", isPageTokenSet.current);
 
   if (listSearchResult.currentPage === 4 && !isPageTokenSet.current)
     isPageTokenSet.current = true;
@@ -49,8 +46,6 @@ export const useSetSearchResult = ({
   else isPageTokenSet.current = false;
 
   useEffect(() => {
-    console.log("FROM useEffect", data?.kind);
-
     if (data !== undefined && !isFetching && !isLoading) {
       console.log("is true");
 
@@ -83,11 +78,8 @@ export const useSetSearchResult = ({
         data!.prevPageToken === undefined &&
         listSearchResult.currentPage === 0
       ) {
-        console.log("new fetched videos", newFetchedVideos);
         dispatch(setFechtedInfo([...newFetchedVideos]));
       } else {
-        console.log("adding videos");
-
         dispatch(
           setFechtedInfo([...listSearchResult.fetchedInfo, ...newFetchedVideos])
         );

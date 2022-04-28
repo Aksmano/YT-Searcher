@@ -1,7 +1,6 @@
 import styles from "./FiltersBar.module.css";
 import { useEffect, useState } from "react";
 import { Filters } from "../Filters/Filters";
-import { SearchBar } from "../SearchBar/SearchBar";
 import { useLocation } from "react-router-dom";
 
 export const FiltersBar = () => {

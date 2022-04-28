@@ -1,8 +1,7 @@
 import styles from "./Navbar.module.css";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import logo from "../../img/yt.png";
 import { useAppDispatch } from "../../app/hooks";
-import { SearchBar } from "../SearchBar/SearchBar";
 import {
   setMOCurrentPage,
   setPrevKind,
@@ -27,30 +26,20 @@ const Navbar = ({ switchTheme }: NavbarProps) => {
     maxResults: "50",
   };
 
+  const handleClick = () => {
+    dispatch(setPrevKind(""));
+    dispatch(setVideoQuery(initialMostPopular));
+    dispatch(setMOCurrentPage(0));
+    dispatch(toggleLoad());
+    navigate("/");
+  };
+
   return (
     <nav className={styles.navbar}>
-      <div
-        className={styles.title}
-        onClick={() => {
-          // dispatch(setOff());
-          // dispatch(setVideoPageToken(""));
-          // dispatch(togglePage());
-          // dispatch(setUpdate(false));
-          // dispatch(setFechtedInfo([]))
-          dispatch(setPrevKind(""));
-          dispatch(setVideoQuery(initialMostPopular));
-          dispatch(setMOCurrentPage(0));
-          dispatch(toggleLoad());
-          navigate("/");
-          console.log("CLICKED LOGO");
-        }}
-      >
-        {/* <Link to={"/"} key={0} className={styles.linkTitle}> */}
+      <div className={styles.title} onClick={handleClick}>
         <img src={logo} alt="yt logo" />
         <div className={styles.divTitle}>YT Searcher</div>
-        {/* </Link> */}
       </div>
-      {/* <SearchBar /> */}
       <button
         className={styles.themeButton}
         onClick={() => {

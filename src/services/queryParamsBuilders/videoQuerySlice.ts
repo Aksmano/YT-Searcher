@@ -10,7 +10,6 @@ const initialState: videoQueryState = {
 };
 
 let isAlreadyIn: boolean;
-// let isAlreadyOut: boolean;
 
 export const videoQuerySlice = createSlice({
   name: "videoQuery",
@@ -27,9 +26,6 @@ export const videoQuerySlice = createSlice({
       });
     },
     addVideoId: (state, action: PayloadAction<string>) => {
-      // isAlreadyIn =
-      //   state.id.find((item) => action.payload === item) === action.payload;
-      // if (isAlreadyIn) state.id.push(action.payload);
       if (state.id!.indexOf(action.payload) === -1)
         state.id!.push(action.payload);
     },

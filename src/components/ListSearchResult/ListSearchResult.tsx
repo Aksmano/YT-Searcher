@@ -11,15 +11,11 @@ export const ListSearchResult = () => {
     queryBuilder(listSearchResult.searchQuery)
   );
 
-  console.log(searchList);
-
   useSetSearchResult({
     data: searchList.data!,
     isFetching: searchList.isFetching,
     isLoading: searchList.isLoading,
   });
-
-  console.log("search fetchedInfo", listSearchResult.fetchedInfo);
 
   return (
     <ListComponents

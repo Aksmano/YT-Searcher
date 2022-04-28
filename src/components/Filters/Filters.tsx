@@ -7,7 +7,6 @@ interface FiltersProps {
 }
 
 export const Filters = ({ filterMode }: FiltersProps) => {
-  // ZROBIC NA WZOR POKEMONOW
   const dispatch = useAppDispatch();
   const searchBar = useAppSelector(selectSearchBar);
 
@@ -81,7 +80,6 @@ export const Filters = ({ filterMode }: FiltersProps) => {
           <button style={{ margin: "0 2rem 0 0" }} onClick={resetSearchQuery}>
             Reset
           </button>
-          {/* <button>Submit</button> */}
         </form>
       </div>
     </div>

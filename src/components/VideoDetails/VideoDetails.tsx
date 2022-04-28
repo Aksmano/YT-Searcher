@@ -1,9 +1,7 @@
 import { decode } from "html-entities";
-import { useEffect } from "react";
 import { useParams } from "react-router-dom";
-import { useAppDispatch, useAppSelector } from "../../app/hooks";
 import queryBuilder from "../../services/queryParamsBuilders/queryBuilder";
-import { videoListResponse, videoQueryState } from "../../services/types";
+import { videoQueryState } from "../../services/types";
 import { useGetListVideosResultQuery } from "../../services/youtube";
 import Loader from "../Loader/Loader";
 import styles from "./VideoDetails.module.css";
@@ -109,7 +107,6 @@ export const VideoDetails = () => {
               className={styles.responsiveIframe}
               src={ytEmbedSource()}
             />
-            )
           </div>
         </div>
         <div className={`${styles.channel}`}>

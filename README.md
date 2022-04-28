@@ -6,7 +6,7 @@ This application uses _[Google YouTube Api](https://developers.google.com/youtub
 
 ## Launching client
 
-> **Important:** After cloning this repo you have to create .env where you will store your Google API Key. The file should be add in the main app folder. After that add a following line:
+> **Important:** After cloning this repo you have to create `.env` where you will store your Google API Key. The file should be add in the main app folder. After that add a following line:
 > `REACT_APP_API_KEY=[YOUR_API_KEY]`
 
 - **npm start** - Runs the app in the development mode.<br>Open on [http://localhost:3000]
